@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MTBS.MovieCatalogAPI.Models;
+using MTBS.MovieCatalogAPI.Services;
 
 namespace MTBS.MovieCatalogAPI.Controllers
 {
@@ -7,10 +8,17 @@ namespace MTBS.MovieCatalogAPI.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<string> Get()
+        private readonly MovieService _movieService;
+
+        public MoviesController(MovieService movieService)
         {
-            return Ok("GetAllMovies");
+            _movieService = movieService;
+        }
+
+        [HttpGet]
+        public async Task<List<Movie>> GetAllMovies()
+        {
+            return await _movieService.GetAllMoviesAsync();
         }
     }
 }
