@@ -4,7 +4,7 @@ using MTBS.MovieCatalogAPI.Models;
 
 namespace MTBS.MovieCatalogAPI.Services
 {
-    public class MovieService
+    public class MovieService : IMovieService
     {
         private readonly IMongoCollection<Movie> _collection;
 

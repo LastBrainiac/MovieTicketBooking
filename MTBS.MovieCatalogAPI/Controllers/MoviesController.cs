@@ -8,17 +8,17 @@ namespace MTBS.MovieCatalogAPI.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        private readonly MovieService _movieService;
+        private readonly IMovieService _movieService;
 
-        public MoviesController(MovieService movieService)
+        public MoviesController(IMovieService movieService)
         {
             _movieService = movieService;
         }
 
         [HttpGet]
-        public async Task<List<Movie>> GetAllMovies()
+        public async Task<ActionResult<List<Movie>>> GetAllMovies()
         {
-            return await _movieService.GetAllMoviesAsync();
+            return Ok(await _movieService.GetAllMoviesAsync());
         }
     }
 }

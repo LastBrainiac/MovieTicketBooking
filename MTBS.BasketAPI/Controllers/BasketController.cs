@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MTBS.BasketAPI.DTOs;
+﻿using Microsoft.AspNetCore.Mvc;
 using MTBS.BasketAPI.Models;
 using MTBS.BasketAPI.Repository;
 
@@ -12,12 +9,10 @@ namespace MTBS.BasketAPI.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
-        private readonly IMapper _mapper;
 
-        public BasketController(IBasketRepository basketRepository, IMapper mapper)
+        public BasketController(IBasketRepository basketRepository)
         {
             _basketRepository = basketRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -28,16 +23,16 @@ namespace MTBS.BasketAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> SaveBasket(CustomerBasketDTO basket)
+        public async Task<ActionResult<CustomerBasket>> SaveBasket([FromBody] CustomerBasket basket)
         {
-            var savedBasket = await _basketRepository.SaveBasketAsync(_mapper.Map<CustomerBasket>(basket));
+            var savedBasket = await _basketRepository.SaveBasketAsync(basket);
             return Ok(savedBasket);
         }
 
         [HttpDelete]
-        public async Task DeleteBasket(string id)
+        public async Task<ActionResult<bool>> DeleteBasket(string id)
         {
-            await _basketRepository.DeleteBasketAsync(id);
+            return Ok(await _basketRepository.DeleteBasketAsync(id));
         }
     }
 }
