@@ -55,7 +55,7 @@ namespace APITests
             var fakeBasket = GetFakeBasket(fakeId);
 
             _basketRepositoryMock.Setup(p => p.DeleteBasketAsync(It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
+                .ReturnsAsync(await Task.FromResult(true));
 
             // Act
             var basketController = new BasketController(_basketRepositoryMock.Object);
