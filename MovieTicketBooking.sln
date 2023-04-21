@@ -23,15 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTBS.BookingAPI", "MTBS.Boo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{28022EF9-B9BD-4FEA-A206-C0C0D73CD174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITests", "APITests\APITests.csproj", "{CB77C481-870D-43D6-9C82-B4BA71B08265}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APITests", "APITests\APITests.csproj", "{CB77C481-870D-43D6-9C82-B4BA71B08265}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{66B2528C-D640-4868-9762-0E61A9D7728A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusBase", "EventBusBase\EventBusBase.csproj", "{F81122BD-D22A-433B-982D-ADDD71312707}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusBase", "EventBusBase\EventBusBase.csproj", "{F81122BD-D22A-433B-982D-ADDD71312707}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusRabbitMQ", "EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{C00C7399-C281-4176-BDCE-14A11B8366C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusRabbitMQ", "EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{C00C7399-C281-4176-BDCE-14A11B8366C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQTests", "RabbitMQTests\RabbitMQTests.csproj", "{7E079ECE-9433-49B6-B660-400E4DF60A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusTests", "RabbitMQTests\EventBusTests.csproj", "{7E079ECE-9433-49B6-B660-400E4DF60A7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

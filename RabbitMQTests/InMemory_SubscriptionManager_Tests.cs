@@ -3,14 +3,14 @@
     public class InMemory_SubscriptionManager_Tests
     {
         [Fact]
-        public void After_Creation_Should_Be_Empty()
+        public void AfterCreationShouldBeEmpty()
         {
             var manager = new InMemoryEventBusSubscriptionsManager();
             Assert.True(manager.IsEmpty);
         }
 
         [Fact]
-        public void After_One_Event_Subscription_Should_Contain_The_Event()
+        public void AfterOneEventSubscriptionShouldContainTheEvent()
         {
             var manager = new InMemoryEventBusSubscriptionsManager();
             manager.AddSubscription<TestIntegrationEvent, TestIntegrationEventHandler>();
@@ -18,7 +18,7 @@
         }
 
         [Fact]
-        public void After_All_Subscriptions_Are_Deleted_Event_Should_No_Longer_Exists()
+        public void AfterAllSubscriptionsAreDeletedEventShouldNoLongerExists()
         {
             var manager = new InMemoryEventBusSubscriptionsManager();
             manager.AddSubscription<TestIntegrationEvent, TestIntegrationEventHandler>();
@@ -27,7 +27,7 @@
         }
 
         [Fact]
-        public void Deleting_Last_Subscription_Should_Raise_On_Deleted_Event()
+        public void DeletingLastSubscriptionShouldRaiseOnDeletedEvent()
         {
             bool raised = false;
             var manager = new InMemoryEventBusSubscriptionsManager();
@@ -38,7 +38,7 @@
         }
 
         [Fact]
-        public void Get_Handlers_For_Event_Should_Return_All_Handlers()
+        public void GetHandlersForEventShouldReturnAllHandlers()
         {
             var manager = new InMemoryEventBusSubscriptionsManager();
             manager.AddSubscription<TestIntegrationEvent, TestIntegrationEventHandler>();
