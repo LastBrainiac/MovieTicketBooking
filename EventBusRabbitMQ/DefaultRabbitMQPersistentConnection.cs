@@ -1,7 +1,7 @@
-﻿using EventBusRabbitMQ.Interfaces;
+﻿using MTBS.EventBus.EventBusRabbitMQ.Interfaces;
 using System.Net.Sockets;
 
-namespace EventBusRabbitMQ
+namespace MTBS.EventBus.EventBusRabbitMQ
 {
     public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
     {
@@ -51,8 +51,7 @@ namespace EventBusRabbitMQ
 
                 policy.Execute(() =>
                 {
-                    _connection = _connectionFactory
-                            .CreateConnection();
+                    _connection = _connectionFactory.CreateConnection();
                 });
 
                 if (IsConnected)

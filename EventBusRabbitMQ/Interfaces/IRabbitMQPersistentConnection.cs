@@ -1,4 +1,4 @@
-﻿namespace EventBusRabbitMQ.Interfaces
+﻿namespace MTBS.EventBus.EventBusRabbitMQ.Interfaces
 {
     public interface IRabbitMQPersistentConnection : IDisposable
     {

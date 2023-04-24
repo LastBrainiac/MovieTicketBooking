@@ -1,7 +1,8 @@
-﻿using EventBusRabbitMQ.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MTBS.EventBus.EventBusRabbitMQ.Interfaces;
 using System.Net.Sockets;
 
-namespace EventBusRabbitMQ
+namespace MTBS.EventBus.EventBusRabbitMQ
 {
     public class EventBusRabbitMQ : IEventBus, IDisposable
     {
@@ -9,20 +10,20 @@ namespace EventBusRabbitMQ
         const string AUTOFAC_SCOPE_NAME = "mtbs_event_bus";
 
         private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IEventBusSubscriptionsManager _subsManager;
-        private readonly ILifetimeScope _autofac;
         private readonly int _retryCount;
 
         private IModel _consumerChannel;
         private string _queueName;
 
-        public EventBusRabbitMQ(IRabbitMQPersistentConnection persistentConnection, ILifetimeScope autofac, IEventBusSubscriptionsManager subsManager, string queueName = null, int retryCount = 5)
+        public EventBusRabbitMQ(IRabbitMQPersistentConnection persistentConnection, IServiceProvider serviceProvider, IEventBusSubscriptionsManager subsManager, string queueName = null, int retryCount = 5)
         {
             _persistentConnection = persistentConnection ?? throw new ArgumentNullException(nameof(persistentConnection));
+            _serviceProvider = serviceProvider;
             _subsManager = subsManager ?? new InMemoryEventBusSubscriptionsManager();
             _queueName = queueName;
             _consumerChannel = CreateConsumerChannel();
-            _autofac = autofac;
             _retryCount = retryCount;
             _subsManager.OnEventRemoved += SubsManager_OnEventRemoved;
         }
@@ -187,20 +188,20 @@ namespace EventBusRabbitMQ
         {
             if (_subsManager.HasSubscriptionsForEvent(eventName))
             {
-                await using var scope = _autofac.BeginLifetimeScope(AUTOFAC_SCOPE_NAME);
+                await using var scope = _serviceProvider.CreateAsyncScope();
                 var subscriptions = _subsManager.GetHandlersForEvent(eventName);
                 foreach (var subscription in subscriptions)
                 {
                     if (subscription.IsDynamic)
                     {
-                        if (scope.ResolveOptional(subscription.HandlerType) is not IDynamicIntegrationEventHandler handler) continue;
+                        if (scope.ServiceProvider.GetService(subscription.HandlerType) is not IDynamicIntegrationEventHandler handler) continue;
                         using dynamic eventData = JsonDocument.Parse(message);
                         await Task.Yield();
                         await handler.Handle(eventData);
                     }
                     else
                     {
-                        var handler = scope.ResolveOptional(subscription.HandlerType);
+                        var handler = scope.ServiceProvider.GetService(subscription.HandlerType);
                         if (handler == null) continue;
                         var eventType = _subsManager.GetEventTypeByName(eventName);
                         var integrationEvent = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
