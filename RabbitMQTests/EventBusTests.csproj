@@ -22,9 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\EventBusBase\EventBusBase.csproj" />
-    <ProjectReference Include="..\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
-  </ItemGroup>
-
 </Project>

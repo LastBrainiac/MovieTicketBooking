@@ -1,6 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using MTBS.NotificationAPI.DbContexts;
+using MTBS.NotificationAPI.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<APIDbContext>(options =>
+              options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+var optionBuilder = new DbContextOptionsBuilder<APIDbContext>();
+optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddSingleton(new NotificationRepository(optionBuilder.Options));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,5 +1,5 @@
-using MTBS.BasketAPI.ExtensionMethods;
 using MTBS.BasketAPI.Repository;
+using MTBS.EventBus;
 using RabbitMQ.Client;
 using StackExchange.Redis;
 
@@ -11,35 +11,8 @@ var multiPlexer = ConnectionMultiplexer.Connect(builder.Configuration.GetConnect
 builder.Services.AddSingleton<IConnectionMultiplexer>(multiPlexer);
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
-builder.Services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
-{
-    var factory = new ConnectionFactory()
-    {
-        HostName = builder.Configuration["EventBus:Connection"],
-        DispatchConsumersAsync = true
-    };
-
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBus:UserName"]))
-    {
-        factory.UserName = builder.Configuration["EventBus:UserName"];
-    }
-
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBus:Password"]))
-    {
-        factory.Password = builder.Configuration["EventBus:Password"];
-    }
-
-    var retryCount = 5;
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBus:RetryCount"]))
-    {
-        retryCount = int.Parse(builder.Configuration["EventBus:RetryCount"]);
-    }
-
-    return new DefaultRabbitMQPersistentConnection(factory, retryCount);
-});
-
-builder.Services.RegisterEventBus(builder.Configuration);
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+builder.Services.AddSingleton(new RabbitMQMessageSender(builder.Configuration));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

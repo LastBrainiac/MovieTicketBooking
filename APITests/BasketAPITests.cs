@@ -1,8 +1,9 @@
-﻿using EventBusBase.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MTBS.BasketAPI.Controllers;
 using MTBS.BasketAPI.Models;
 using MTBS.BasketAPI.Repository;
+using MTBS.EventBus;
 using System.Net;
 
 namespace APITests
@@ -10,12 +11,14 @@ namespace APITests
     public class BasketAPITests
     {
         private readonly Mock<IBasketRepository> _basketRepositoryMock;
-        private readonly Mock<IEventBus> _eventBusMock;
+        private readonly Mock<IRabbitMQMessageSender> _eventBusMock;
+        private readonly Mock<IConfiguration> _configurationMock;
 
         public BasketAPITests()
         {
             _basketRepositoryMock = new Mock<IBasketRepository>();
-            _eventBusMock = new Mock<IEventBus>();
+            _eventBusMock = new Mock<IRabbitMQMessageSender>();
+            _configurationMock = new Mock<IConfiguration>();
         }
 
         [Fact]
@@ -27,7 +30,7 @@ namespace APITests
             _basketRepositoryMock.Setup(p => p.GetBasketAsync(It.IsAny<string>()))
                 .ReturnsAsync(await Task.FromResult(fakeBasket));
 
-            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object);
+            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
             var response = await basketController.GetBasketById(fakeId);
 
             Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
@@ -43,7 +46,7 @@ namespace APITests
             _basketRepositoryMock.Setup(p => p.SaveBasketAsync(It.IsAny<CustomerBasket>()))
                 .ReturnsAsync(await Task.FromResult(fakeBasket));
 
-            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object);
+            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
             var response = await basketController.SaveBasket(fakeBasket);
 
             Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
@@ -61,7 +64,7 @@ namespace APITests
                 .ReturnsAsync(await Task.FromResult(true));
 
             // Act
-            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object);
+            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
             var response = await basketController.DeleteBasket(fakeId);
 
             // Assert

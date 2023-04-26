@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.104" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventBusBase\EventBusBase.csproj" />
-    <ProjectReference Include="..\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
+    <Folder Include="ExtensionMethods\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MTBS.EventBus\MTBS.EventBus.csproj" />
   </ItemGroup>
 
 </Project>

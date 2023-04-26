@@ -1,8 +1,8 @@
-﻿using EventBusBase.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using MTBS.BasketAPI.EventBusIntegration.Events;
+﻿using Microsoft.AspNetCore.Mvc;
+using MTBS.BasketAPI.EventBusIntegration.Messages;
 using MTBS.BasketAPI.Models;
 using MTBS.BasketAPI.Repository;
+using MTBS.EventBus;
 
 namespace MTBS.BasketAPI.Controllers
 {
@@ -11,12 +11,14 @@ namespace MTBS.BasketAPI.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
-        private readonly IEventBus _eventBus;
+        private readonly IRabbitMQMessageSender _messageSender;
+        private readonly IConfiguration _configuration;
 
-        public BasketController(IBasketRepository basketRepository, IEventBus eventBus)
+        public BasketController(IBasketRepository basketRepository, IRabbitMQMessageSender messageSender, IConfiguration configuration)
         {
             _basketRepository = basketRepository;
-            _eventBus = eventBus;
+            _messageSender = messageSender;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -49,9 +51,10 @@ namespace MTBS.BasketAPI.Controllers
                 return BadRequest();
             }
 
-            var eventMessage = new UserFinishedBookingIntegrationEvent(checkoutBasket.FullName, checkoutBasket.EmailAddress, checkoutBasket.PhoneNumber, basket);
+            var message = new UserFinishedBooking(checkoutBasket.FullName, checkoutBasket.EmailAddress, checkoutBasket.PhoneNumber, basket);
 
-            _eventBus.Publish(eventMessage);
+            //_messageSender.PublishMessage(message, _configuration["EventBus:BookingQueueName"]);
+            _messageSender.PublishMessage(message, _configuration["EventBus:NotificationQueueName"]);
 
             return Accepted();
         }
