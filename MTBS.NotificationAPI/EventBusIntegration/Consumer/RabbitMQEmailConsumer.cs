@@ -10,10 +10,10 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
     public class RabbitMQEmailConsumer : BackgroundService
     {
         private readonly NotificationRepository _notificationRepository;
-        private readonly IRabbitMQConsumer _rabbitMQConsumer;
+        private readonly RabbitMQConsumer _rabbitMQConsumer;
         private readonly IConfiguration _configuration;
 
-        public RabbitMQEmailConsumer(NotificationRepository notificationRepository, IRabbitMQConsumer rabbitMQConsumer, IConfiguration configuration)
+        public RabbitMQEmailConsumer(NotificationRepository notificationRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration)
         {
             _notificationRepository = notificationRepository;
             _rabbitMQConsumer = rabbitMQConsumer;

@@ -10,9 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<APIDbContext>(options =>
               options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
-
 var optionBuilder = new DbContextOptionsBuilder<APIDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddSingleton(new NotificationRepository(optionBuilder.Options));
