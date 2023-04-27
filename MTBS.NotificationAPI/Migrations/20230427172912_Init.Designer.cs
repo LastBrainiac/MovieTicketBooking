@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTBS.NotificationAPI.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    [Migration("20230426173704_Init")]
+    [Migration("20230427172912_Init")]
     partial class Init
     {
         /// <inheritdoc />

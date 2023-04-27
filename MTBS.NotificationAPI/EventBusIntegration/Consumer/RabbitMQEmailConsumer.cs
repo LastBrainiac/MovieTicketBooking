@@ -40,7 +40,8 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
         {
             EmailLogMessage emailLog = new EmailLogMessage
             {
-                EmailAddress = result.EmailAddress
+                EmailAddress = result.EmailAddress,
+                Created = result.MessageCreated
             };
 
             await _notificationRepository.CreateLogEntry(emailLog);

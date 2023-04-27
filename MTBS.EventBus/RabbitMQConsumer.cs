@@ -4,7 +4,7 @@ using RabbitMQ.Client.Events;
 
 namespace MTBS.EventBus
 {
-    public class RabbitMQConsumer : IRabbitMQConsumer
+    public class RabbitMQConsumer
     {
         private IConnection _connection;
         private IModel _channel;

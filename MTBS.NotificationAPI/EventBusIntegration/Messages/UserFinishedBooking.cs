@@ -1,6 +1,8 @@
-﻿namespace MTBS.NotificationAPI.EventBusIntegration.Messages
+﻿using MTBS.EventBus;
+
+namespace MTBS.NotificationAPI.EventBusIntegration.Messages
 {
-    public class UserFinishedBooking
+    public class UserFinishedBooking : BaseMessage
     {
         public string FullName { get; set; }
         public string EmailAddress { get; set; }

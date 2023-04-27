@@ -4,5 +4,6 @@
     {
         public int BookingId { get; set; } = 9999;
         public string EmailAddress { get; set; }
+        public DateTime Created { get; set; }
     }
 }

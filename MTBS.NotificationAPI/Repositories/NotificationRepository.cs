@@ -18,7 +18,7 @@ namespace MTBS.NotificationAPI.Repositories
             EmailLog emailLog = new EmailLog
             {
                 EmailAddress = logMessage.EmailAddress,
-                EmailSent = DateTime.Now,
+                EmailSent = logMessage.Created,
                 LogText = $"Ticket booking - #{logMessage.BookingId} has been created successfully."
             };
             _dbContext.EmailLogs.Add(emailLog);
