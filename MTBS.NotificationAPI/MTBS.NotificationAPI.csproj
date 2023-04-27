@@ -19,4 +19,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MTBS.EventBus\MTBS.EventBus.csproj" />
+  </ItemGroup>
+
 </Project>

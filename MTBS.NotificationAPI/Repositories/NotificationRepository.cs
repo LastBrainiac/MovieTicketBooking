@@ -19,7 +19,7 @@ namespace MTBS.NotificationAPI.Repositories
             {
                 EmailAddress = logMessage.EmailAddress,
                 EmailSent = DateTime.Now,
-                LogText = $"Ticket booking - {logMessage.BookingId} has been created successfully."
+                LogText = $"Ticket booking - #{logMessage.BookingId} has been created successfully."
             };
             _dbContext.EmailLogs.Add(emailLog);
             await _dbContext.SaveChangesAsync();

@@ -16,8 +16,8 @@ namespace MTBS.EventBus
         public RabbitMQMessageSender(IConfiguration configuration)
         {
             _hostname = configuration["EventBus:HostName"];
-            _password = configuration["EventBus:UserName"];
-            _username = configuration["EventBus:Password"];
+            _username = configuration["EventBus:UserName"];
+            _password = configuration["EventBus:Password"];
         }
 
         public void PublishMessage<T>(T message, string queueName) where T : BaseMessage
