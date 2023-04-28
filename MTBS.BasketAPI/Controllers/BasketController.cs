@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MTBS.BasketAPI.EventBusIntegration.Messages;
 using MTBS.BasketAPI.Models;
+using MTBS.BasketAPI.Models.DTOs;
 using MTBS.BasketAPI.Repository;
 using MTBS.EventBus;
 
@@ -42,7 +43,7 @@ namespace MTBS.BasketAPI.Controllers
         }
 
         [HttpPost("checkout")]
-        public async Task<ActionResult> CheckoutBasket([FromBody] CheckoutBasket checkoutBasket)
+        public async Task<ActionResult> CheckoutBasket([FromBody] CheckoutBasketDTO checkoutBasket)
         {
             var basket = await _basketRepository.GetBasketAsync(checkoutBasket.BasketId);
 
@@ -53,8 +54,7 @@ namespace MTBS.BasketAPI.Controllers
 
             var message = new UserFinishedBooking(checkoutBasket.FullName, checkoutBasket.EmailAddress, checkoutBasket.PhoneNumber, basket);
 
-            //_messageSender.PublishMessage(message, _configuration["EventBus:BookingQueueName"]);
-            _messageSender.PublishMessage(message, _configuration["EventBus:NotificationQueueName"]);
+            _messageSender.PublishMessage(message, _configuration["EventBus:BookingQueueName"]);            
 
             return Accepted();
         }

@@ -1,6 +1,6 @@
-﻿namespace MTBS.BasketAPI.Models
+﻿namespace MTBS.BasketAPI.Models.DTOs
 {
-    public class CheckoutBasket
+    public class CheckoutBasketDTO
     {
         public string BasketId { get; set; }
         public string FullName { get; set; }

@@ -7,5 +7,10 @@ namespace MTBS.BookingAPI.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
+        [HttpGet]
+        public async Task<ActionResult<Object>> GetBookedSeatList(string movieId, DateOnly screeningDate, TimeOnly screeningTime)
+        {
+            return Ok();
+        }
     }
 }
