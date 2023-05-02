@@ -1,9 +1,9 @@
-﻿using MTBS.NotificationAPI.EventBusIntegration.Messages;
+﻿using MTBS.NotificationAPI.Models;
 
 namespace MTBS.NotificationAPI.Repositories
 {
     public interface INotificationRepository
     {
-        Task CreateLogEntry(EmailLogMessage logMessage);
+        Task CreateLogEntry(EmailLog logMessage);
     }
 }

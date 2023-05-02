@@ -13,15 +13,9 @@ namespace MTBS.NotificationAPI.Repositories
             _dbContext = new APIDbContext(contextOptions);
         }
 
-        public async Task CreateLogEntry(EmailLogMessage logMessage)
-        {
-            EmailLog emailLog = new EmailLog
-            {
-                EmailAddress = logMessage.EmailAddress,
-                EmailSent = logMessage.Created,
-                LogText = $"Ticket booking - #{logMessage.BookingId} has been created successfully."
-            };
-            _dbContext.EmailLogs.Add(emailLog);
+        public async Task CreateLogEntry(EmailLog logMessage)
+        {            
+            _dbContext.EmailLogs.Add(logMessage);
             await _dbContext.SaveChangesAsync();
         }
     }

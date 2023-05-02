@@ -1,5 +1,6 @@
 ﻿using MTBS.EventBus;
 using MTBS.NotificationAPI.EventBusIntegration.Messages;
+using MTBS.NotificationAPI.Models;
 using MTBS.NotificationAPI.Repositories;
 using RabbitMQ.Client;
 using System.Text;
@@ -27,7 +28,7 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
             _rabbitMQConsumer.Consumer.Received += (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                UserFinishedBooking receivedObj = JsonSerializer.Deserialize<UserFinishedBooking>(content);
+                EmailLogMessage receivedObj = JsonSerializer.Deserialize<EmailLogMessage>(content);
                 HandleResult(receivedObj).GetAwaiter().GetResult();
                 _rabbitMQConsumer.Channel.BasicAck(ea.DeliveryTag, false);
             };
@@ -36,12 +37,13 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
             return Task.CompletedTask;
         }
 
-        private async Task HandleResult(UserFinishedBooking result)
+        private async Task HandleResult(EmailLogMessage result)
         {
-            EmailLogMessage emailLog = new EmailLogMessage
+            EmailLog emailLog = new EmailLog
             {
                 EmailAddress = result.EmailAddress,
-                Created = result.MessageCreated
+                EmailSent = result.MessageCreated,
+                LogText = $"Ticket booking - #{result.BookingId} has been created successfully."
             };
 
             await _notificationRepository.CreateLogEntry(emailLog);

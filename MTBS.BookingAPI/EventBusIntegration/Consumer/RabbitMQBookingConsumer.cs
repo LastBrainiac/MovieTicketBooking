@@ -4,6 +4,7 @@ using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
 using MTBS.BookingAPI.EventBusIntegration.Messages;
+using MTBS.BookingAPI.Models;
 
 namespace MTBS.BookingAPI.EventBusIntegration.Consumer
 {
@@ -12,12 +13,14 @@ namespace MTBS.BookingAPI.EventBusIntegration.Consumer
         private readonly BookingRepository _bookingRepository;
         private readonly RabbitMQConsumer _rabbitMQConsumer;
         private readonly IConfiguration _configuration;
+        private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public RabbitMQBookingConsumer(BookingRepository bookingRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration)
+        public RabbitMQBookingConsumer(BookingRepository bookingRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration, IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _bookingRepository = bookingRepository;
             _rabbitMQConsumer = rabbitMQConsumer;
             _configuration = configuration;
+            _rabbitMQMessageSender = rabbitMQMessageSender;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,7 +41,48 @@ namespace MTBS.BookingAPI.EventBusIntegration.Consumer
 
         private async Task HandleResult(UserFinishedBooking result)
         {
+            BookingHeader bookingHeader = new BookingHeader
+            {
+                FullName = result.FullName,
+                EmailAddress = result.EmailAddress,
+                PhoneNumber = result.PhoneNumber,
+            };
 
+            var bookingDetailsList = new List<BookingDetails>();
+            foreach (var movie in result.BookedMovies)
+            {
+                BookingDetails bookingDetails = new BookingDetails
+                {
+                    MovieId = movie.MovieId,
+                    MovieTitle = movie.MovieTitle,
+                    ScreeningDate = movie.ScreeningDate,
+                    TicketQuantity = movie.TicketQuantity
+                };
+
+                var reservedSeatList = new List<ReservedSeat>();
+                foreach (var seat in movie.BookedSeats)
+                {                    
+                    ReservedSeat reservedSeat = new ReservedSeat
+                    {
+                        RowNumber = seat.Row,
+                        SeatNumber = seat.Number
+                    };
+                    reservedSeatList.Add(reservedSeat);
+                }
+                bookingDetails.ReservedSeats = reservedSeatList;
+                bookingDetailsList.Add(bookingDetails);
+            }
+            bookingHeader.BookingDetails = bookingDetailsList;
+
+            await _bookingRepository.SaveBookingDataAsync(bookingHeader);
+
+            var emailLogMessage = new EmailLogMessage
+            {
+                BookingId = bookingHeader.Id,
+                EmailAddress = bookingHeader.EmailAddress
+            };
+
+            _rabbitMQMessageSender.PublishMessage(emailLogMessage, _configuration["EventBus:NotificationQueueName"]);
         }
     }
 }

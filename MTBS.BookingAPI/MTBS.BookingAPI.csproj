@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DTOs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MTBS.EventBus\MTBS.EventBus.csproj" />
   </ItemGroup>
 
