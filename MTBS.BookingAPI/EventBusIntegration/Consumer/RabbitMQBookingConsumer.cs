@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text;
 using MTBS.BookingAPI.EventBusIntegration.Messages;
 using MTBS.BookingAPI.Models;
+using AutoMapper;
 
 namespace MTBS.BookingAPI.EventBusIntegration.Consumer
 {
@@ -14,24 +15,27 @@ namespace MTBS.BookingAPI.EventBusIntegration.Consumer
         private readonly RabbitMQConsumer _rabbitMQConsumer;
         private readonly IConfiguration _configuration;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
+        private readonly IMapper _mapper;
 
-        public RabbitMQBookingConsumer(BookingRepository bookingRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration, IRabbitMQMessageSender rabbitMQMessageSender)
+        public RabbitMQBookingConsumer(BookingRepository bookingRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration,
+            IRabbitMQMessageSender rabbitMQMessageSender, IMapper mapper)
         {
             _bookingRepository = bookingRepository;
             _rabbitMQConsumer = rabbitMQConsumer;
             _configuration = configuration;
             _rabbitMQMessageSender = rabbitMQMessageSender;
+            _mapper = mapper;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             stoppingToken.ThrowIfCancellationRequested();
 
-            _rabbitMQConsumer.Consumer.Received += (ch, ea) =>
+            _rabbitMQConsumer.Consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
                 UserFinishedBooking receivedObj = JsonSerializer.Deserialize<UserFinishedBooking>(content);
-                HandleResult(receivedObj).GetAwaiter().GetResult();
+                await HandleResult(receivedObj);
                 _rabbitMQConsumer.Channel.BasicAck(ea.DeliveryTag, false);
             };
             _rabbitMQConsumer.Channel.BasicConsume(_configuration["EventBus:ConsumerQueue"], false, _rabbitMQConsumer.Consumer);
@@ -41,47 +45,10 @@ namespace MTBS.BookingAPI.EventBusIntegration.Consumer
 
         private async Task HandleResult(UserFinishedBooking result)
         {
-            BookingHeader bookingHeader = new BookingHeader
-            {
-                FullName = result.FullName,
-                EmailAddress = result.EmailAddress,
-                PhoneNumber = result.PhoneNumber,
-            };
-
-            var bookingDetailsList = new List<BookingDetails>();
-            foreach (var movie in result.BookedMovies)
-            {
-                BookingDetails bookingDetails = new BookingDetails
-                {
-                    MovieId = movie.MovieId,
-                    MovieTitle = movie.MovieTitle,
-                    ScreeningDate = movie.ScreeningDate,
-                    TicketQuantity = movie.TicketQuantity
-                };
-
-                var reservedSeatList = new List<ReservedSeat>();
-                foreach (var seat in movie.BookedSeats)
-                {                    
-                    ReservedSeat reservedSeat = new ReservedSeat
-                    {
-                        RowNumber = seat.Row,
-                        SeatNumber = seat.Number
-                    };
-                    reservedSeatList.Add(reservedSeat);
-                }
-                bookingDetails.ReservedSeats = reservedSeatList;
-                bookingDetailsList.Add(bookingDetails);
-            }
-            bookingHeader.BookingDetails = bookingDetailsList;
-
+            var bookingHeader = _mapper.Map<BookingHeader>(result);
             await _bookingRepository.SaveBookingDataAsync(bookingHeader);
 
-            var emailLogMessage = new EmailLogMessage
-            {
-                BookingId = bookingHeader.Id,
-                EmailAddress = bookingHeader.EmailAddress
-            };
-
+            var emailLogMessage = _mapper.Map<EmailLogMessage>(bookingHeader);
             _rabbitMQMessageSender.PublishMessage(emailLogMessage, _configuration["EventBus:NotificationQueueName"]);
         }
     }

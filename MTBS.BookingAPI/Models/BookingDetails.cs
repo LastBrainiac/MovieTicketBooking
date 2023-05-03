@@ -10,7 +10,7 @@ namespace MTBS.BookingAPI.Models
         public string MovieId { get; set; }
         public string MovieTitle { get; set; }
         public int TicketQuantity { get; set; }
-        public int TicketPrice { get; set; } = 2500;
+        public int TicketPrice { get; set; }
         public DateTime ScreeningDate { get; set; }        
         public int BookingHeaderId { get; set; }
         [ForeignKey(nameof(BookingHeaderId))]

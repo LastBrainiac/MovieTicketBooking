@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MTBS.BookingAPI.Models.DTOs;
+using MTBS.BookingAPI.Repositories;
 
 namespace MTBS.BookingAPI.Controllers
 {
@@ -7,10 +9,18 @@ namespace MTBS.BookingAPI.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<Object>> GetBookedSeatList(string movieId, DateTime screeningDate)
+        private readonly IBookingRepository _bookingRepository;
+
+        public BookingController(IBookingRepository bookingRepository)
         {
-            return Ok();
+            _bookingRepository = bookingRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ReservedSeatDTO>>> GetBookedSeatList(string movieId, DateTime screeningDate)
+        {
+            var seatList = await _bookingRepository.GetReservedSeatListAsync(movieId, screeningDate);
+            return Ok(seatList);
         }
     }
 }

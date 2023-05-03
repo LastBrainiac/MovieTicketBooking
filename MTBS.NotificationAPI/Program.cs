@@ -15,8 +15,9 @@ optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCon
 builder.Services.AddSingleton(new NotificationRepository(optionBuilder.Options));
 
 builder.Services.AddSingleton(new RabbitMQConsumer(builder.Configuration));
-
 builder.Services.AddHostedService<RabbitMQEmailConsumer>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

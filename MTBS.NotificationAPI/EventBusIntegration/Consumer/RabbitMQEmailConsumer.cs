@@ -1,4 +1,5 @@
-﻿using MTBS.EventBus;
+﻿using AutoMapper;
+using MTBS.EventBus;
 using MTBS.NotificationAPI.EventBusIntegration.Messages;
 using MTBS.NotificationAPI.Models;
 using MTBS.NotificationAPI.Repositories;
@@ -13,12 +14,15 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
         private readonly NotificationRepository _notificationRepository;
         private readonly RabbitMQConsumer _rabbitMQConsumer;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public RabbitMQEmailConsumer(NotificationRepository notificationRepository, RabbitMQConsumer rabbitMQConsumer, IConfiguration configuration)
+        public RabbitMQEmailConsumer(NotificationRepository notificationRepository, RabbitMQConsumer rabbitMQConsumer,
+            IConfiguration configuration, IMapper mapper)
         {
             _notificationRepository = notificationRepository;
             _rabbitMQConsumer = rabbitMQConsumer;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -39,13 +43,7 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
 
         private async Task HandleResult(EmailLogMessage result)
         {
-            EmailLog emailLog = new EmailLog
-            {
-                EmailAddress = result.EmailAddress,
-                EmailSent = result.MessageCreated,
-                LogText = $"Ticket booking - #{result.BookingId} has been created successfully."
-            };
-
+            var emailLog = _mapper.Map<EmailLog>(result);
             await _notificationRepository.CreateLogEntry(emailLog);
         }
     }

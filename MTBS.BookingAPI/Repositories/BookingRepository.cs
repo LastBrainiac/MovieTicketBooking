@@ -16,7 +16,7 @@ namespace MTBS.BookingAPI.Repositories
 
         public async Task<List<ReservedSeatDTO>> GetReservedSeatListAsync(string movieId, DateTime screeningDate)
         {
-            throw new NotImplementedException();
+            return new List<ReservedSeatDTO>();
         }
 
         public async Task SaveBookingDataAsync(BookingHeader bookingHeader)

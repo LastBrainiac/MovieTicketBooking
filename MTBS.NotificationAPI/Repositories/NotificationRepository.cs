@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MTBS.NotificationAPI.DbContexts;
-using MTBS.NotificationAPI.EventBusIntegration.Messages;
 using MTBS.NotificationAPI.Models;
 
 namespace MTBS.NotificationAPI.Repositories
