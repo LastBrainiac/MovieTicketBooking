@@ -29,11 +29,11 @@ namespace MTBS.NotificationAPI.EventBusIntegration.Consumer
         {
             stoppingToken.ThrowIfCancellationRequested();
 
-            _rabbitMQConsumer.Consumer.Received += (ch, ea) =>
+            _rabbitMQConsumer.Consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
                 EmailLogMessage receivedObj = JsonSerializer.Deserialize<EmailLogMessage>(content);
-                HandleResult(receivedObj).GetAwaiter().GetResult();
+                await HandleResult(receivedObj);
                 _rabbitMQConsumer.Channel.BasicAck(ea.DeliveryTag, false);
             };
             _rabbitMQConsumer.Channel.BasicConsume(_configuration["EventBus:ConsumerQueue"], false, _rabbitMQConsumer.Consumer);

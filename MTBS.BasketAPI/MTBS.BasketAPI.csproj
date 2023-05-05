@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MTBS.EventBus\MTBS.EventBus.csproj" />
   </ItemGroup>
 

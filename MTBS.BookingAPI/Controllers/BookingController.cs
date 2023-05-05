@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MTBS.BookingAPI.Models.DTOs;
+﻿using Microsoft.AspNetCore.Mvc;
+using MTBS.BookingAPI.Models.Dtos;
 using MTBS.BookingAPI.Repositories;
 
 namespace MTBS.BookingAPI.Controllers
@@ -17,9 +16,9 @@ namespace MTBS.BookingAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ReservedSeatDTO>>> GetBookedSeatList(string movieId, DateTime screeningDate)
+        public async Task<ActionResult<List<ViewingAreaRowDTO>>> GetSeatListByMovieAndDate(string movieId, DateTime screeningDate)
         {
-            var seatList = await _bookingRepository.GetReservedSeatListAsync(movieId, screeningDate);
+            var seatList = await _bookingRepository.GetFullSeatListAsync(movieId, screeningDate);
             return Ok(seatList);
         }
     }

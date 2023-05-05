@@ -7,7 +7,6 @@ namespace MTBS.NotificationAPI.Models
         public int Id { get; set; }
         public string EmailAddress { get; set; }
         public string LogText { get; set; }
-        //[Column(TypeName ="Date")]
         public DateTime EmailSent { get; set; }
     }
 }

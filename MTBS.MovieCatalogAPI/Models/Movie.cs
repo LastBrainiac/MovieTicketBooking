@@ -15,7 +15,7 @@ namespace MTBS.MovieCatalogAPI.Models
         public string MovieLength { get; set; }
         public string ReleaseYear { get; set; }
         [JsonConverter(typeof(ByteArrayConverter))]
-        public byte[] ThumbnailPic { get; set; } = new byte[0];
+        public byte[] ThumbnailPic { get; set; } = Array.Empty<byte>();
         public List<List<string>> StartTimes { get; set; }
     }
 }
