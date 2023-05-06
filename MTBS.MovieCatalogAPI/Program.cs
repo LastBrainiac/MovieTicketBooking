@@ -8,6 +8,8 @@ builder.Services.Configure<MovieDbSettings>(builder.Configuration.GetSection("Mo
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -20,8 +22,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseAuthorization();
 
 app.MapControllers();
 

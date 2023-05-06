@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MTBS.BookingAPI.DbContexts;
 using MTBS.BookingAPI.EventBusIntegration.Consumer;
+using MTBS.BookingAPI.Extensions;
 using MTBS.BookingAPI.Repositories;
 using MTBS.EventBus;
 
@@ -37,8 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseAutoMigration();
 
 app.Run();

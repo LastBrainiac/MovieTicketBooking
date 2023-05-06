@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MTBS.EventBus;
 using MTBS.NotificationAPI.DbContexts;
 using MTBS.NotificationAPI.EventBusIntegration.Consumer;
+using MTBS.NotificationAPI.Extensions;
 using MTBS.NotificationAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,8 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseAutoMigration();
 
 app.Run();
