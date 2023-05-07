@@ -31,7 +31,7 @@ namespace APITests
 
             var response = await movieCatalogController.GetAllMovies();
 
-            Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
+            Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
         }
 
         private List<Movie> GetFakeMovieList()

@@ -22,11 +22,7 @@ namespace APITests
         {
             var movieId = "1111111";
             var screeningDate = new DateTime(2023, 05, 10);
-            BookingHeader bookingHeader = GetFakeBookingHeader(movieId, screeningDate);
             List<ViewingAreaRowDTO> seatList = GetFakeSeatList();
-
-            _repository.Setup(p => p.SaveBookingDataAsync(bookingHeader))
-                .Returns(Task.FromResult(typeof(Task)));
 
             _repository.Setup(p => p.GetFullSeatListAsync(movieId, screeningDate))
                 .Returns(Task.FromResult(seatList));
@@ -35,42 +31,8 @@ namespace APITests
 
             var response = await bookingController.GetSeatListByMovieAndDate(movieId, screeningDate);
 
-            Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
-            Assert.Equal(((ObjectResult)response.Result).Value as List<ViewingAreaRowDTO>, seatList);
-        }
-
-        private BookingHeader GetFakeBookingHeader(string movieId, DateTime screeningDate)
-        {
-            return new BookingHeader
-            {
-                FullName = "XYZ",
-                EmailAddress = "xyz@gmail.com",
-                PhoneNumber = "1234567890",
-                BookingDetails = new List<BookingDetails>
-                {
-                    new BookingDetails
-                    {
-                        MovieId = movieId,
-                        MovieTitle = "Great Movie",
-                        ScreeningDate = screeningDate,
-                        TicketPrice = 2500,
-                        TicketQuantity = 2,
-                        ReservedSeats = new List<ReservedSeat>
-                        {
-                            new ReservedSeat
-                            {
-                                RowNumber = 1,
-                                SeatNumber = 2,
-                            },
-                            new ReservedSeat
-                            {
-                                RowNumber = 1,
-                                SeatNumber = 3,
-                            }
-                        }
-                    }
-                }
-            };
+            Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
+            Assert.Equal(seatList, ((ObjectResult)response.Result).Value as List<ViewingAreaRowDTO>);
         }
 
         private List<ViewingAreaRowDTO> GetFakeSeatList()

@@ -33,8 +33,8 @@ namespace APITests
             var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
             var response = await basketController.GetBasketById(fakeId);
 
-            Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
-            Assert.Equal((((ObjectResult)response.Result).Value as CustomerBasket).Id, fakeId);
+            Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
+            Assert.Equal(fakeId, (((ObjectResult)response.Result).Value as CustomerBasket).Id);
         }
 
         [Fact]
@@ -49,8 +49,8 @@ namespace APITests
             var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
             var response = await basketController.SaveBasket(fakeBasket);
 
-            Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
-            Assert.Equal((((ObjectResult)response.Result).Value as CustomerBasket).Id, fakeId);
+            Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
+            Assert.Equal(fakeId, (((ObjectResult)response.Result).Value as CustomerBasket).Id);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace APITests
             var response = await basketController.DeleteBasket(fakeId);
 
             // Assert
-            Assert.Equal((response.Result as OkObjectResult).StatusCode, (int)HttpStatusCode.OK);
+            Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
             Assert.True((bool)((ObjectResult)response.Result).Value);
         }
 
