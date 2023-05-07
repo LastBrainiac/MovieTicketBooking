@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MTBS.BasketAPI\MTBS.BasketAPI.csproj" />
+    <ProjectReference Include="..\MTBS.BookingAPI\MTBS.BookingAPI.csproj" />
     <ProjectReference Include="..\MTBS.MovieCatalogAPI\MTBS.MovieCatalogAPI.csproj" />
   </ItemGroup>
 
