@@ -8,7 +8,7 @@ namespace MTBS.NotificationAPI.Helpers
     {
         public string Resolve(EmailLogMessage source, EmailLog destination, string destMember, ResolutionContext context)
         {
-            return source.BookingId > 0 ? $"Ticket booking - #{source.BookingId} has been created successfully." : null;
+            return source.BookingId > 0 ? $"Ticket booking - #{source.BookingId} has been created successfully and notification email sent to the client." : null;
         }
     }
 }
