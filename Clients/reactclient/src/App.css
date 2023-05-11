@@ -1,3 +1,203 @@
-.App {
-  text-align: center;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--black-medium);
+  color: var(--white);
+  padding: 0 20px;
+}
+
+.ns-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.ns-container>h2 {
+  font-family: 'Bruno Ace', cursive;
+  margin-bottom: 1.5em;
+  font-size: 1.3rem;
+  letter-spacing: .15em;
+}
+
+.now-showing {
+  display: grid;
+  gap: 1em;
+}
+
+header h1 {
+  position: relative;
+  color: var(--yellow);
+  letter-spacing: .5em;
+  font-family: 'Reggae One', cursive;
+}
+
+header h1>span {
+  position: absolute;
+  font-size: 1.6em;
+  left: 23px;
+  top: -18px;
+}
+
+ul {
+  z-index: -999;
+  height: 0;
+  width: 0;
+}
+
+.movie-card {
+  height: 250px;
+  position: relative;
+  cursor: default;
+  letter-spacing: .1em;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.movie-card .masked {
+  width: 90%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 120px;
+  left: 0;
+  transition: all 0.5s ease-in-out;
+  margin: 0 1em;
+}
+
+.movie-img {
+  display: block;
+  position: relative;
+  transition: all 0.2s linear;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-title,
+.movie-genre,
+.movie-release-year,
+.movie-length {
+  position: relative;
+  margin: 0;
+  text-shadow: 0 1px 4px black;
+  transform: translateY(100px);
+  transition: all 0.2s linear;
+}
+
+.movie-genre,
+.movie-release-year,
+.movie-length {
+  font-weight: 400;
+  font-size: .8rem;
+}
+
+.movie-title {
+  font-weight: 500;
+  font-size: 1rem;  
+}
+
+.movie-genre {
+  margin-top: .7em;
+}
+
+.btn {
+  border: none;
+  padding: .6em 1.6em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: hsl(180, 25%, 15%);
+}
+
+.btn-booking {
+  color: hsl(0, 0%, 56%);
+  display: block;
+  margin: .5em auto 0 auto;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 0 10px black;
+  transform: translateY(100px);
+  transition: all 0.2s linear;
+}
+
+.movie-card:hover img {
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.movie-card:hover .movie-title,
+.movie-card:hover .movie-genre,
+.movie-card:hover .movie-release-year,
+.movie-card:hover .movie-length,
+.movie-card:hover .btn {
+  transform: translateY(0px);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--white);
+}
+
+a:hover {
+  color: var(--white);
+}
+
+a:active {
+  color: var(--white);
+}
+
+@media (min-width: 780px) {
+  ul {
+    z-index: 1;
+    height: 35px;
+    width: 65%;
+    border-radius: 8px;
+    background-color: var(--gray);
+    color: var(--gray-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul>li {
+    list-style: none;
+    margin-right: 2em;
+    cursor: pointer;
+  }
+
+  ul>li:hover {
+    color: var(--yellow);
+  }
+
+  .now-showing {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  ul {
+    width: 45%;
+  }
+
+  .now-showing {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media (min-width: 1700px) {
+  ul {
+    width: 30%;
+  }
+
+  .now-showing {
+    grid-template-columns: auto auto auto auto;
+  }
 }

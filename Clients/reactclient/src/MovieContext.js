@@ -6,19 +6,21 @@ const MovieContext = createContext();
 
 const MovieContextProvider = (props) => {
     const [allMovies, setAllMovies] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        fetch(`${GlobalVariables.baseUrl}api/movies`)
-            .then(resp => resp.json())
-            .then(data => {
-                setAllMovies(data);
-                console.log(data);
-            });
+        async function getMovies() {
+            const response = await fetch(`${GlobalVariables.baseUrl}api/movies`);
+            const data = await response.json();
+            setAllMovies(data);
+        }
+        getMovies();
     }, []);
 
     return (
         <MovieContext.Provider value={{
-            allMovies
+            allMovies,
+            cartItems
         }}>
             {props.children}
         </MovieContext.Provider>
