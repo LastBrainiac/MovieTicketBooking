@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Movie = ({ movie }) => {
+    const [data, setData] = useState(movie);
 
     return (
         <div className="movie-card">
@@ -9,7 +12,7 @@ const Movie = ({ movie }) => {
                 <p className="movie-genre">{movie.genre}</p>
                 <p className="movie-release-year">{movie.releaseYear}</p>
                 <p className="movie-length">Length {movie.movieLength}</p>
-                <button className="btn btn-booking">Ticket Booking</button>
+                <Link to='/screening' state={{ movie: data }} className="btn btn-booking"><p>Ticket Booking</p></Link>
             </div>
         </div>
     )
