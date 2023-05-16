@@ -16,7 +16,13 @@ const Header = () => {
 
     return (
         <header>
-            <Link to='/'><h1>M<span>T</span>B</h1></Link>
+            <Link to='/'>
+                <div className="logo">
+                    <h1 className="m"><span>M</span>ovie</h1>
+                    <h1 className="t"><span>T</span>icket</h1>
+                    <h1><span>B</span>ooking</h1>
+                </div>
+            </Link>
             {windowWidth > 780 &&
                 <HeaderMenu />
             }

@@ -4,17 +4,23 @@ import Header from './components/header/Header';
 import NowShowing from './pages/NowShowing';
 import ScreeningTimes from './pages/ScreeningTimes';
 import Footer from './components/footer/Footer';
+import GridLoader from 'react-spinners/GridLoader';
+import { useContext } from 'react';
+import { MovieContext } from './MovieContext';
 
 function App() {
+  const { loading } = useContext(MovieContext);
+
   return (
     <div>
       <Header />
+      <GridLoader className="loader" color='#0c72f7' loading={loading} />
       <Routes>
         <Route path='/' element={<NowShowing />} />
         <Route path='/screening' element={<ScreeningTimes />} />
         <Route path='/cart' element={<NowShowing />} />
       </Routes>
-      <Footer />
+      {!loading && <Footer />}
     </div>
   );
 }

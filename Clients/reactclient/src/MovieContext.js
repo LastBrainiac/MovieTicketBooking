@@ -1,18 +1,20 @@
 import { createContext, useEffect, useState } from 'react';
 import * as GlobalVariables from './shared/globals.js';
 
-
 const MovieContext = createContext();
 
 const MovieContextProvider = (props) => {
     const [allMovies, setAllMovies] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        async function getMovies() {
+        setLoading(true);
+        const getMovies = async () => {
             const response = await fetch(`${GlobalVariables.baseUrl}api/movies`);
             const data = await response.json();
             setAllMovies(data);
+            setLoading(false);
         }
         getMovies();
     }, []);
@@ -20,8 +22,9 @@ const MovieContextProvider = (props) => {
     return (
         <MovieContext.Provider value={{
             allMovies,
-            cartItems
-        }}>
+            cartItems,
+            loading
+        }}>            
             {props.children}
         </MovieContext.Provider>
     )

@@ -1,5 +1,5 @@
 :root {
-  --black-dark: #080808;
+  --black-dark: #0f0f0f;
   --black-medium: #1b1b1b;
   --gray: #333333;
   --gray-light: #808080;
@@ -11,6 +11,7 @@ body, html {
   margin: 0;
   padding: 0;
   background-color: var(--black-dark);
+  background-attachment: fixed;;
   color: var(--white);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;

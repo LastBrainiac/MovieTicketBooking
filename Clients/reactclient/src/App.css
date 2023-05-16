@@ -10,7 +10,7 @@ header {
 .ns-container {
   width: 80%;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
 }
 
 .ns-container>h2 {
@@ -25,22 +25,53 @@ header {
   gap: 1em;
 }
 
-header h1 {
-  position: relative;
-  color: var(--blue);
-  letter-spacing: .5em;
-  font-family: 'Reggae One', cursive;
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
 }
 
-header h1:hover {
+.logo {
+  padding: 1em 0;
+}
+
+.logo h1 {
+  margin: 0;
+  line-height: .3em;
+  color: var(--gray-light);
+  font-size: 1rem;
+}
+
+.logo span {
+  font-family: 'Reggae One', cursive;
+  font-size: 1.7rem;
+  color: var(--blue);
+}
+
+.logo:hover {
   text-shadow: 0 0 30px var(--blue);
 }
 
-header h1>span {
+.logo .m {
+  padding-left: 2.2em;
+  margin-bottom: .6em;
+}
+
+.logo .t {
+  position: relative;
+  padding-left: 2em;
+}
+
+.logo .t>span {
   position: absolute;
-  font-size: 1.6em;
-  left: 23px;
-  top: -18px;
+  left: .7em;
+  top: -.3em;
+}
+
+header i {
+  color: var(--white);
 }
 
 ul {
@@ -82,6 +113,7 @@ ul>li:hover {
   left: 0;
   transition: all 0.5s ease-in-out;
   margin: 0 1em;
+  padding: 0 .5em;
 }
 
 .movie-img {
@@ -147,7 +179,7 @@ ul>li:hover {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 7px black;
   transform: translateY(100px);
   transition: all 0.2s linear;
 }
@@ -156,6 +188,7 @@ ul>li:hover {
   -ms-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+  opacity: .7;
 }
 
 .movie-card:hover .movie-title,
@@ -187,18 +220,24 @@ a:active {
 }
 
 footer {
-  background-color: var(--black-medium);
   width: 80%;
   margin: 1em auto;
-  padding: 1.5em 0;
-  border-radius: 10px;
 }
 
 .footer-menu {
+  background-color: var(--black-medium);
+  border-radius: 10px;
+  padding: 1em 0;
   display: grid;
-  gap: 2em; 
+  grid-template-columns: auto auto auto;
+  gap: 1.5em;
   justify-content: center;
   align-items: start;
+}
+
+.footer-menu,
+.copyright {
+  font-size: .75rem;
 }
 
 .copyright {
@@ -208,17 +247,12 @@ footer {
 }
 
 .footer-container p {
-  margin: 0 0 .5em 0;
+  margin: 0 0 .2em 0;
   color: var(--gray-light);
   cursor: pointer;
 }
 
 .footer-container p:hover {
-  color: var(--blue);
-}
-
-.footer-container h4 {
-  margin: 0 0 .5em 0;
   color: var(--blue);
 }
 
@@ -238,6 +272,11 @@ footer {
   .footer-menu {
     gap: 9em;
     grid-template-columns: auto auto auto;
+  }
+
+  .footer-menu,
+  .copyright {
+    font-size: .875rem;
   }
 }
 
