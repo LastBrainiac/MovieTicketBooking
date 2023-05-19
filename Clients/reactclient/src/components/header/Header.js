@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../../MovieContext";
 import { Link } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
+import Badge from '@mui/material/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Tooltip } from "@mui/material";
 
 const Header = () => {
     const { cartItems } = useContext(MovieContext);
-    const cartClass = cartItems.length > 0 ? "fill" : "line";
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -15,7 +17,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header>
+        <div className="header-container">
             <Link to='/'>
                 <div className="logo">
                     <h1 className="m"><span>M</span>ovie</h1>
@@ -26,8 +28,14 @@ const Header = () => {
             {windowWidth > 780 &&
                 <HeaderMenu />
             }
-            <Link to='/cart'><i className={`ri-shopping-cart-${cartClass} ri-fw ri-2x`}></i></Link>
-        </header>
+            <Link to='/cart'>
+                <Tooltip title='My Bookings' placement="bottom-start" arrow>
+                    <Badge badgeContent={cartItems.length} color="primary">
+                        <ShoppingCartIcon sx={{ color: 'var(--gray-light)' }} />
+                    </Badge>
+                </Tooltip>
+            </Link>
+        </div>
     )
 }
 

@@ -1,11 +1,14 @@
 import { useLocation } from "react-router-dom";
+import Sessions from "../components/cinema-sessions/Sessions";
 
-const ScreeningTimes = () => {    
+const ScreeningTimes = () => {
     const location = useLocation();
     const movie = location.state.movie;
 
     return (
-        <p>ScreeningTimes Page</p>
+        <main>
+            <Sessions movie={movie} />
+        </main>
     )
 }
 
