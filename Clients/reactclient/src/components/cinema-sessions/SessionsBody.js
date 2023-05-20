@@ -1,10 +1,12 @@
 import TabComponent from "./sessions-tab/TabComponent";
+import TabContent from "./sessions-tab/TabContent";
 
 const SessionsBody = ({ startTimes }) => {
     return (
-        <div>
-            <h3>Session Body</h3>
-            <TabComponent startTimes={startTimes} />
+        <div className="session-body">
+            <TabComponent />
+            <p className="screening-title">SCREENING TIMES</p>
+            <TabContent startTimes={startTimes} />
         </div>
     )
 }
