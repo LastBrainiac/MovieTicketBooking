@@ -4,8 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import { Tooltip } from "@mui/material";
 
-const Sessions = ({ movie }) => {
-
+const Sessions = () => {
     return (
         <div className="cinema-sessions">
             <Link to='/'>
@@ -13,8 +12,8 @@ const Sessions = ({ movie }) => {
                     <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
                 </Tooltip>
             </Link>
-            <SessionHeader movie={movie} />
-            <SessionsBody startTimes={movie.startTimes} />
+            <SessionHeader />
+            <SessionsBody />
         </div>
     )
 }

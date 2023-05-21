@@ -3,8 +3,7 @@ import { MovieContext } from "../../../MovieContext";
 import TabItem from "./TabItem";
 
 const TabComponent = () => {
-    const { getScreeningData } = useContext(MovieContext);
-    var screeningData = getScreeningData();
+    const {screeningData} = useContext(MovieContext);
 
     const tabHeaderItems = screeningData.map(data => {
         return (

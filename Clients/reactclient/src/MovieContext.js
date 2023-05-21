@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import * as GlobalVariables from './shared/globals.js';
+import * as Common from './shared/common.js';
 
 const MovieContext = createContext();
 
@@ -7,6 +8,8 @@ const MovieContextProvider = (props) => {
     const [allMovies, setAllMovies] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState({});
+    const [screeningData, setScreeningData] = useState([]);
 
     useEffect(() => {
         setLoading(true);
@@ -17,28 +20,15 @@ const MovieContextProvider = (props) => {
             setLoading(false);
         }
         getMovies();
+        getScreeningData();
     }, []);
 
-    const getScreeningData = () => {
-        var weekDays = [];
+    const storeSelectedMovie = (movie) => {
+        setSelectedMovie(movie);
+    }
 
-        weekDays = [...Array(7).keys()]
-            .map(item => {
-                const currentDay = () => {
-                    const currentDate = new Date();
-                    currentDate.setDate(currentDate.getDate() + item);
-                    return currentDate;
-                }
-                return (
-                    {
-                        fullDate: currentDay().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }),
-                        day: currentDay().toLocaleDateString('en-US', { day: 'numeric' }),
-                        dayName: currentDay().toLocaleDateString('en-US', { weekday: 'short' }),
-                        isSelected: item === 0 ? true : false
-                    }
-                )
-            });
-        return weekDays;
+    const getScreeningData = () => {
+        setScreeningData(Common.getScreeningData());
     }
 
     return (
@@ -46,7 +36,9 @@ const MovieContextProvider = (props) => {
             allMovies,
             cartItems,
             loading,
-            getScreeningData
+            selectedMovie,
+            screeningData,
+            storeSelectedMovie
         }}>
             {props.children}
         </MovieContext.Provider>

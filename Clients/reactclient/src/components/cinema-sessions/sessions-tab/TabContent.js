@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { MovieContext } from "../../../MovieContext";
 
-const TabContent = ({ startTimes }) => {
+const TabContent = () => {
+    const { selectedMovie } = useContext(MovieContext);
 
-    const screeningTimeButtons = startTimes.map(time => {
+    const screeningTimeButtons = selectedMovie.startTimes.map(time => {
         return (
-            <Link className="start-times" to='/selectseat' state={{  }}  key={time}>
+            <Link className="start-times" to='/selectseat' key={time}>
                 <p>{time}</p>
             </Link>
         )
