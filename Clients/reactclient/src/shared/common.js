@@ -8,10 +8,10 @@ const getScreeningData = () => {
             }
             return (
                 {
-                    fullDate: currentDay().toISOString().split('T')[0],
+                    shortDate: currentDay().toISOString().split('T')[0],
                     day: currentDay().toLocaleDateString('en-US', { day: 'numeric' }),
                     dayName: currentDay().toLocaleDateString('en-US', { weekday: 'short' }),
-                    isSelected: index === 0 ? true : false
+                    isSelected: false
                 }
             )
         });

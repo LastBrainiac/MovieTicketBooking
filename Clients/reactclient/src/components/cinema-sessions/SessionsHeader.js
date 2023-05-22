@@ -1,8 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../../MovieContext";
 
 const SessionHeader = () => {
-    const { selectedMovie } = useContext(MovieContext);
+    const { selectedMovie, setDayIsSelected, screeningData } = useContext(MovieContext);
+
+    var item = (screeningData.find(item => item.isSelected));
+
+    useEffect(() => {
+        setDayIsSelected(item === undefined ? screeningData[0] : item);
+    }, []);
 
     return (
         <div className="session-header">
@@ -17,6 +23,7 @@ const SessionHeader = () => {
                 </div>
             </div>
         </div>
+
     )
 }
 

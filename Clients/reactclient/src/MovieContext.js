@@ -10,6 +10,8 @@ const MovieContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState({});
     const [screeningData, setScreeningData] = useState([]);
+    const [screeningShortDate, setScreeningShortDate] = useState('');
+    const [screeningTime, setScreeningTime] = useState('');
 
     useEffect(() => {
         setLoading(true);
@@ -31,6 +33,15 @@ const MovieContextProvider = (props) => {
         setScreeningData(Common.getScreeningData());
     }
 
+    const setDayIsSelected = (data) => {
+        setScreeningData(prev => prev.map(item => item.day === data.day ? { ...item, isSelected: true } : { ...item, isSelected: false }));
+        setScreeningShortDate(data.shortDate);
+    }
+
+    const storeScreeningTime = (time) => {
+        setScreeningTime(time);
+    }
+
     return (
         <MovieContext.Provider value={{
             allMovies,
@@ -38,7 +49,11 @@ const MovieContextProvider = (props) => {
             loading,
             selectedMovie,
             screeningData,
-            storeSelectedMovie
+            screeningShortDate,
+            screeningTime,
+            storeSelectedMovie,
+            setDayIsSelected,
+            storeScreeningTime
         }}>
             {props.children}
         </MovieContext.Provider>
