@@ -11,7 +11,8 @@ import SeatSelection from './pages/SeatSelection';
 
 function App() {
   const { loading } = useContext(MovieContext);
-
+  // window.onbeforeunload = () => {return false;}
+  
   return (
     <div>
       <Header />

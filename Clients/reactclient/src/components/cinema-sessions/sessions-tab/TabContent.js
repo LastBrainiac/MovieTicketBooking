@@ -9,7 +9,7 @@ const TabContent = () => {
         storeScreeningTime(time);
     }
 
-    const screeningTimeButtons = selectedMovie.startTimes.map(time => {
+    const screeningTimeButtons = selectedMovie?.startTimes?.map(time => {
         return (
             <Link className="start-times" to='/selectseat' onClick={() => clickHandler(time)} key={time}>
                 <p>{time}</p>

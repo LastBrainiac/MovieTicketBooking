@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { MovieContext } from "../../../MovieContext";
 
 const TabItem = ({ data }) => {
-    const {setDayIsSelected} = useContext(MovieContext);    
+    const { setDayIsSelected } = useContext(MovieContext);
     const itemClass = data.isSelected ? 'tab-item-selected' : 'tab-item';
 
     const clickHandler = () => {

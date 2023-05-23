@@ -34,8 +34,8 @@ const MovieContextProvider = (props) => {
     }
 
     const setDayIsSelected = (data) => {
-        setScreeningData(prev => prev.map(item => item.day === data.day ? { ...item, isSelected: true } : { ...item, isSelected: false }));
-        setScreeningShortDate(data.shortDate);
+        setScreeningData(prev => prev.map(item => item.day === data?.day ? { ...item, isSelected: true } : { ...item, isSelected: false }));
+        setScreeningShortDate(data?.shortDate);        
     }
 
     const storeScreeningTime = (time) => {
