@@ -14,23 +14,27 @@ namespace MTBS.BookingAPI.Repositories
             _dbContext = new APIDbContext(contextOptions);
         }
 
-        public async Task<List<ViewingAreaRowDTO>> GetFullSeatListAsync(string movieId, DateTime screeningDate)
+        public async Task<ViewingAreaRowDTO> GetFullSeatListAsync(string movieId, DateTime screeningDate)
         {
             var bookedSeats = await _dbContext.BookingDetails
                 .Join(_dbContext.ReservedSeats, a => a.Id, b => b.BookingDetailsId, (a, b) => new { a.MovieId, a.ScreeningDate, b.RowNumber, b.SeatNumber })
                 .Where(p => p.MovieId == movieId && p.ScreeningDate == screeningDate).ToListAsync();
 
-            var seatList = Enumerable.Range(1, 10).Select(index => new ViewingAreaRowDTO
+            var viewingArea = new ViewingAreaRowDTO
             {
-                RowNumber = index,
-                Seats = Enumerable.Range(1, 10).Select(seatNumber => new SeatDto
+                Rows = Enumerable.Range(1, 10).Select(row => new RowDto
                 {
-                    SeatNumber = seatNumber,
-                    Booked = bookedSeats.Any(p => p.RowNumber == index && p.SeatNumber == seatNumber)
-                }).ToList(),
-            }).ToList();
+                    RowNumber = row,
+                    Seats = Enumerable.Range(1, 12).Select(seatNumber => new SeatDto
+                    {
+                        SeatNumber = seatNumber,
+                        Booked = bookedSeats.Any(p => p.RowNumber == row && p.SeatNumber == seatNumber),
+                        IsSelected = false
+                    }).ToList()
+                }).ToList()                
+            };
 
-            return seatList;
+            return viewingArea;
         }
 
         public async Task SaveBookingDataAsync(BookingHeader bookingHeader)

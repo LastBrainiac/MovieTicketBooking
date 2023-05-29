@@ -4,6 +4,7 @@ import { MovieContext } from "../MovieContext";
 
 const Movie = ({ movie }) => {
     const {storeSelectedMovie} = useContext(MovieContext);
+    
     const clickHandler = () => {
         storeSelectedMovie(movie);
     }

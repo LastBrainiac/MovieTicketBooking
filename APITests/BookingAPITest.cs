@@ -22,7 +22,7 @@ namespace APITests
         {
             var movieId = "1111111";
             var screeningDate = new DateTime(2023, 05, 10);
-            List<ViewingAreaRowDTO> seatList = GetFakeSeatList();
+            ViewingAreaRowDTO seatList = GetFakeSeatList();
 
             _repository.Setup(p => p.GetFullSeatListAsync(movieId, screeningDate))
                 .Returns(Task.FromResult(seatList));
@@ -32,17 +32,19 @@ namespace APITests
             var response = await bookingController.GetSeatListByMovieAndDate(movieId, screeningDate);
 
             Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
-            Assert.Equal(seatList, ((ObjectResult)response.Result).Value as List<ViewingAreaRowDTO>);
+            Assert.Equal(seatList, ((ObjectResult)response.Result).Value as ViewingAreaRowDTO);
         }
 
-        private List<ViewingAreaRowDTO> GetFakeSeatList()
+        private ViewingAreaRowDTO GetFakeSeatList()
         {
-            return new List<ViewingAreaRowDTO>()
+            return new ViewingAreaRowDTO()
             {
-                new ViewingAreaRowDTO
+                Rows = new List<RowDto>
                 {
-                    RowNumber = 1,
-                    Seats = new List<SeatDto>
+                    new RowDto
+                    {
+                        RowNumber = 1,
+                        Seats = new List<SeatDto>
                     {
                         new SeatDto
                         {
@@ -54,6 +56,7 @@ namespace APITests
                             SeatNumber = 3,
                             Booked = true
                         }
+                    }
                     }
                 }
             };

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../MovieContext";
 import SelectionHeader from "../components/seat-selection/SelectionHeader";
 import SelectionBody from "../components/seat-selection/SelectionBody";
@@ -8,12 +8,16 @@ import { Link } from "react-router-dom";
 import { Tooltip } from "@mui/material";
 
 const SeatSelection = () => {
-    const { screeningShortDate, screeningTime, selectedMovie } = useContext(MovieContext);
+    const { screeningShortDate, screeningTime, selectedMovie, invokeAPIMethod, showFooter } = useContext(MovieContext);
+
+    useEffect(() => {
+        invokeAPIMethod(`booking?movieid=${selectedMovie.id}&screeningdate=${screeningShortDate} ${screeningTime}`, true);
+    }, []);
 
     return (
         <div className="seat-selection-container">
-            <Link to='/screening'>
-                <Tooltip title='Back to screening times' placement="left" arrow>
+            <Link to='/screening' onClick={() => showFooter()}>
+                <Tooltip title='Back to screening dates' placement="left" arrow>
                     <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
                 </Tooltip>
             </Link>

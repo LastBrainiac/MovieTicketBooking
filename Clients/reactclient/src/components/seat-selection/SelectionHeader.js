@@ -13,7 +13,7 @@ const SelectionHeader = () => {
                 <div className="title-content selection-title-content">
                     <p className="title">{selectedMovie?.title?.toUpperCase()}</p>
                     <p className="title-other">{selectedMovie?.movieLength} | {selectedMovie?.releaseYear} | {selectedMovie?.genre}</p>
-                    <p className="title-other">{screeningShortDate} {screeningTime}</p>
+                    <p className="title-date">{screeningShortDate} {screeningTime}</p>
                 </div>
             </div>
         </div>

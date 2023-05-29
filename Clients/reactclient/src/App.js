@@ -10,7 +10,8 @@ import { MovieContext } from './MovieContext';
 import SeatSelection from './pages/SeatSelection';
 
 function App() {
-  const { loading } = useContext(MovieContext);
+  const { loading, hideFooter } = useContext(MovieContext);
+
   // window.onbeforeunload = () => {return false;}
   
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path='/selectseat' element={<SeatSelection />} />
         <Route path='/cart' element={<NowShowing />} />
       </Routes>
-      {!loading && <Footer />}
+      {!loading && !hideFooter && <Footer />}
     </div>
   );
 }

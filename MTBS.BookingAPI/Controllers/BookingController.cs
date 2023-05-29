@@ -16,14 +16,14 @@ namespace MTBS.BookingAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ViewingAreaRowDTO>>> GetSeatListByMovieAndDate(string movieId, DateTime screeningDate)
+        public async Task<ActionResult<ViewingAreaRowDTO>> GetSeatListByMovieAndDate(string movieId, DateTime screeningDate)
         {
             if (string.IsNullOrEmpty(movieId) || screeningDate == DateTime.MinValue)
             {
                 return BadRequest();
             }
-            var seatList = await _bookingRepository.GetFullSeatListAsync(movieId, screeningDate);
-            return Ok(seatList);
+            var viewingArea = await _bookingRepository.GetFullSeatListAsync(movieId, screeningDate);
+            return Ok(viewingArea);
         }
     }
 }

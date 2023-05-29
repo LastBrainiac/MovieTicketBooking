@@ -2,7 +2,6 @@
 {
     public class ViewingAreaRowDTO
     {
-        public int RowNumber { get; set; }
-        public List<SeatDto> Seats { get; set; }
+        public List<RowDto> Rows { get; set; }
     }
 }

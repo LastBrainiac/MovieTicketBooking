@@ -5,6 +5,9 @@
   --gray-light: #808080;
   --blue: #0c72f7;
   --white: #fdfaeb;
+  --available: rgb(179, 179, 179);
+  --unavailable: hsl(0, 0%, 27%);
+  --selected: rgb(255, 153, 0);
 }
 
 body, html {  
