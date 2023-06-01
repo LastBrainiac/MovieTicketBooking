@@ -29,7 +29,7 @@ const Header = () => {
                 <HeaderMenu />
             }
             <Link to='/cart'>
-                <Tooltip title='My Bookings' placement="bottom-start" arrow>
+                <Tooltip title='My Bookings' placement="left">
                     <Badge badgeContent={cartItems.length} color="primary">
                         <ShoppingCartIcon sx={{ color: 'var(--gray-light)' }} />
                     </Badge>

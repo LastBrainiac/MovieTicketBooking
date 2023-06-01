@@ -3,16 +3,33 @@ import { MovieContext } from "../../MovieContext";
 import { Tooltip } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import SelectedSeat from "./viewing-area/SelectedSeat";
+import * as GlobalVariables from '../../shared/globals';
+import { useNavigate } from "react-router-dom";
 
-const SelectionFooter = () => {    
-    const { selectedSeats } = useContext(MovieContext);
-    const selectedSeatsClass = selectedSeats.length > 0 ? "show-selected-seats" : ""
+const SelectionFooter = () => {
+    const navigate = useNavigate();
+    const { selectedSeats, addItemToCart, selectedMovie, screeningShortDate, screeningTime, showFooter } = useContext(MovieContext);
+    const selectedSeatsClass = selectedSeats.length > 0 ? "show-selected-seats" : "";
 
     const selectedSeatList = selectedSeats.map((seat, index) => {
         return (
             <SelectedSeat key={index} row={seat.row} number={seat.number} />
         )
     })
+
+    const clickHandler = () => {
+        const cartItem = {
+            movieId: selectedMovie.id,
+            movieTitle: selectedMovie.title,
+            ticketQuantity: selectedSeats.length,
+            ticketPrice: GlobalVariables.ticketPrice,
+            screeningDate: new Date(`${screeningShortDate} ${screeningTime}`).toISOString(),
+            bookedSeats: selectedSeats
+        }
+        addItemToCart(cartItem);
+        showFooter();
+        navigate('/');
+    }
 
     return (
         <div className="selection-footer-container">
@@ -23,12 +40,12 @@ const SelectionFooter = () => {
                         {selectedSeatList}
                     </div>
                     <div className="total-price">
-                        <p>Total {selectedSeats.length * 2500} HUF</p>                        
+                        <p>Total {selectedSeats.length * GlobalVariables.ticketPrice} HUF</p>
                     </div>
                 </div>
                 <div className="add-to-cart">
-                    <button className="btn btn-add-to-cart">
-                        <Tooltip title='Add to My Bookings' arrow placement="right-start">
+                    <button className="btn btn-add-to-cart" onClick={clickHandler}>
+                        <Tooltip title='Add to My Bookings' placement="top">
                             <AddIcon sx={{ fontSize: '3em' }} />
                         </Tooltip>
                     </button>

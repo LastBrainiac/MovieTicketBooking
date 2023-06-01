@@ -14,7 +14,7 @@
 .ns-container {
   width: 80%;
   margin: 0 auto;
-  padding: 6em 0 0 0;
+  padding: 6em 0 11em 0;
 }
 
 .ns-container>h2 {
@@ -221,16 +221,16 @@ a:active {
 
 .cinema-sessions {
   position: relative;
-  padding-top: 8.2em;
+  padding-top: 2.5em;
   width: 80%;
   text-align: center;
-  margin: 0 auto;
+  margin: 6em auto auto;
 }
 
 .close-icon {
   position: absolute;
-  right: 0;
-  top: 93px;
+  right: 3px;
+  top: 3px;
   color: var(--gray-light);
 }
 
@@ -386,12 +386,12 @@ a:active {
 
 footer {
   width: 80%;
-  margin: 1em auto;
+  margin: 0 auto;
+  background-color: var(--black-medium);
+  opacity: .95;
 }
 
-.footer-menu {
-  background-color: var(--black-medium);
-  border-radius: 10px;
+.footer-menu {    
   padding: 1em 0;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -405,10 +405,12 @@ footer {
   font-size: .75rem;
 }
 
-.copyright {
-  margin: 2.5em .3em 0 .3em;
+.copyright {  
+  margin: 0;
+  padding: 1em 0;
   text-align: center;
   color: var(--gray-light);
+  background-color: var(--black-dark);
 }
 
 .footer-container p {
@@ -429,8 +431,8 @@ footer {
 .seat-selection-container {
   position: relative;
   width: 80%;
-  padding-top: 8em;
-  margin: 0 auto;
+  padding-top: 2.5em;
+  margin: 6em auto auto;
 }
 
 .selection-header {
@@ -677,6 +679,42 @@ footer {
   font-size: 1.8em;
 }
 
+.shopping-cart {
+  position: relative;
+  padding: .5em 0;
+  margin: 7em auto auto;
+  width: 80%;
+  border-radius: 10px;
+  background-color: var(--black-medium);
+  border: 1px solid var(--gray);
+}
+
+.cart-items {
+  margin: 2em .5em;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.empty-cart-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--available);
+  gap: .5em;
+}
+
+.items-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-forward {
+  padding-left: .8em;
+  width: 8%;
+}
+
 @media (min-width: 780px) {
   .header-container {
     padding: .6em 0;
@@ -691,7 +729,10 @@ footer {
   }
 
   footer {
-    margin: 5em auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .footer-menu {

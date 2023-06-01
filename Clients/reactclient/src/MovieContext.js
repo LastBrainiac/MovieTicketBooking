@@ -1,12 +1,13 @@
 import { createContext, useEffect, useState } from 'react';
 import * as GlobalVariables from './shared/globals.js';
 import * as Common from './shared/common.js';
+import { createId } from '@paralleldrive/cuid2';
 
 const MovieContext = createContext();
 
 const MovieContextProvider = (props) => {
     const [allMovies, setAllMovies] = useState([]);
-    const [cartItems, setCartItems] = useState([{}]);
+    const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState({});
     const [screeningData, setScreeningData] = useState([]);
@@ -17,6 +18,7 @@ const MovieContextProvider = (props) => {
     const [apiResponse, setAPIResponse] = useState([]);
     const [hideFooter, setHideFooter] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [saveBasketTrigger, setSaveBasketTrigger] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -44,6 +46,35 @@ const MovieContextProvider = (props) => {
         }
         callAPI();
     }, [callAPITrigger]);
+
+    useEffect(() => {
+        const callPersistsBasketData = async () => {
+            if (saveBasketTrigger) {
+                setLoading(true);
+
+                let basketId = localStorage.getItem('basketid');
+                if (!basketId) basketId = createId();
+                const myBasket = {
+                    id: basketId,
+                    items: cartItems
+                }
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(myBasket)
+                };
+
+                const response = await fetch(`${GlobalVariables.baseUrl}api/basket`, options);
+                const data = await response.json();
+                localStorage.setItem('basketid', data.id);
+                setLoading(false);
+                setSaveBasketTrigger(false);
+            }
+        }
+        callPersistsBasketData();
+    }, [saveBasketTrigger])
 
     const selectedSeatToggle = (rowN, seatN) => {
         setAPIResponse(prev => {
@@ -98,12 +129,21 @@ const MovieContextProvider = (props) => {
 
     const selectedSeatHandler = (seat, flag) => {
         if (flag) {
-            setSelectedSeats(prev => {
-                return prev.filter(s => s.row !== seat.row || s.number !== seat.number);
-            })
+            setSelectedSeats(prev => prev.filter(s => s.row !== seat.row || s.number !== seat.number));
         } else {
             setSelectedSeats(prev => [...prev, seat]);
         }
+    }
+
+    const addItemToCart = (item) => {
+        if (!cartItems.find(cartItem => cartItem.movieId === item.movieId)) {
+            setCartItems(prev => [...prev, item]);
+            setSaveBasketTrigger(true);
+        }
+    }
+
+    const deleteCartItem = (movieId) => {
+        setCartItems(prev => prev.filter(item => item.movieId !== movieId));
     }
 
     return (
@@ -124,7 +164,9 @@ const MovieContextProvider = (props) => {
             invokeAPIMethod,
             selectedSeatToggle,
             showFooter,
-            selectedSeatHandler
+            selectedSeatHandler,
+            addItemToCart,
+            deleteCartItem
         }}>
             {props.children}
         </MovieContext.Provider>

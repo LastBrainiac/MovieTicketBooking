@@ -10,17 +10,6 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy("CorsPolicy", policy =>
-    {
-        policy
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .SetIsOriginAllowed((host) => true);
-    });
-});
-
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -33,8 +22,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("CorsPolicy");
 
 app.MapControllers();
 

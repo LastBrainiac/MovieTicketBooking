@@ -11,17 +11,6 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 builder.Services.AddSingleton(new RabbitMQMessageSender(builder.Configuration));
 
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy("CorsPolicy", policy =>
-    {
-        policy
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .SetIsOriginAllowed((host) => true);
-    });
-});
-
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -34,8 +23,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("CorsPolicy");
 
 app.MapControllers();
 

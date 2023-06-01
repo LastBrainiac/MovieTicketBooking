@@ -8,6 +8,7 @@ import GridLoader from 'react-spinners/GridLoader';
 import { useContext } from 'react';
 import { MovieContext } from './MovieContext';
 import SeatSelection from './pages/SeatSelection';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const { loading, hideFooter } = useContext(MovieContext);
@@ -22,7 +23,7 @@ function App() {
         <Route path='/' element={<NowShowing />} />
         <Route path='/screening' element={<ScreeningTimes />} />
         <Route path='/selectseat' element={<SeatSelection />} />
-        <Route path='/cart' element={<NowShowing />} />
+        <Route path='/cart' element={<ShoppingCart />} />
       </Routes>
       {!loading && !hideFooter && <Footer />}
     </div>

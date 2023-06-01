@@ -1,6 +1,6 @@
 :root {
   --black-dark: #080808;
-  --black-medium: #1a1a1a;
+  --black-medium: hsl(0, 0%, 8%);
   --gray: #333333;
   --gray-light: #808080;
   --blue: #0c72f7;
