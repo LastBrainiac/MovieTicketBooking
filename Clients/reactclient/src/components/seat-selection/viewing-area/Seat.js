@@ -13,19 +13,19 @@ const Seat = ({ seat, row }) => {
     const { selectedSeatToggle, selectedSeatHandler, selectedSeats } = useContext(MovieContext);
     const seatStatusClass = seat.booked ? "square-unavailable" : seat.isSelected ? "square-selected" : "square-available";
 
-    const clickHandler = (seatObj) => {
+    const clickHandler = () => {
         let seatNotBookedAndSelectedSeatCountIsOk = false;
         let seatIsSelectedAndSeatCountReachedMaxValue = false;
 
         if (selectedSeats.length < GlobalVariables.maxTicketCount) {
-            if (!seatObj.seat.booked) seatNotBookedAndSelectedSeatCountIsOk = true;
+            if (!seat.booked) seatNotBookedAndSelectedSeatCountIsOk = true;
         } else {
-            if (!seatObj.seat.isSelected && !seatObj.seat.booked) setOpen(true);
+            if (!seat.isSelected && !seat.booked) setOpen(true);
             else seatIsSelectedAndSeatCountReachedMaxValue = true;
         }
 
-        if (!seatObj.seat.booked && (seatNotBookedAndSelectedSeatCountIsOk || seatIsSelectedAndSeatCountReachedMaxValue)) {
-            selectedSeatToggle(seatObj.row, seatObj.seat.seatNumber);
+        if (!seat.booked && (seatNotBookedAndSelectedSeatCountIsOk || seatIsSelectedAndSeatCountReachedMaxValue)) {
+            selectedSeatToggle(row, seat.seatNumber);
             selectedSeatHandler({ row: row, number: seat.seatNumber }, seat.isSelected);
         }
     }
@@ -36,7 +36,7 @@ const Seat = ({ seat, row }) => {
 
     return (
         <div>
-            <div className={`square seat-square ${seatStatusClass}`} onClick={() => clickHandler({ row: row, seat: seat })}>
+            <div className={`square seat-square ${seatStatusClass}`} onClick={clickHandler}>
                 <span>{seat.seatNumber}</span>
             </div>
             <Dialog

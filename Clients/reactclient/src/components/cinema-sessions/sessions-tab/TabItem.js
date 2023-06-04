@@ -5,12 +5,8 @@ const TabItem = ({ data }) => {
     const { setDayIsSelected } = useContext(MovieContext);
     const itemClass = data.isSelected ? 'tab-item-selected' : 'tab-item';
 
-    const clickHandler = () => {
-        setDayIsSelected(data);
-    }
-
     return (
-        <div className={`${itemClass}`} onClick={clickHandler}>
+        <div className={`${itemClass}`} onClick={() => setDayIsSelected(data)}>
             <p className="day">{data.day}</p>
             <p>{data.dayName}</p>
         </div>

@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import { MovieContext } from "../MovieContext";
 
 const Movie = ({ movie }) => {
-    const {storeSelectedMovie} = useContext(MovieContext);
-    
-    const clickHandler = () => {
-        storeSelectedMovie(movie);
-    }
+    const { storeSelectedMovie } = useContext(MovieContext);
 
     return (
         <div className="movie-card">
@@ -17,7 +13,7 @@ const Movie = ({ movie }) => {
                 <p className="movie-genre">{movie.genre}</p>
                 <p className="movie-release-year">{movie.releaseYear}</p>
                 <p className="movie-length">Length {movie.movieLength}</p>
-                <Link to='/screening' onClick={clickHandler} className="btn btn-booking"><p>Ticket Booking</p></Link>
+                <Link to='/screening' onClick={() => storeSelectedMovie(movie)} className="btn btn-booking"><p>Ticket Booking</p></Link>
             </div>
         </div>
     )

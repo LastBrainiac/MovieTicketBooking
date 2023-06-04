@@ -19,11 +19,13 @@ const MovieContextProvider = (props) => {
     const [hideFooter, setHideFooter] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [saveBasketTrigger, setSaveBasketTrigger] = useState(false);
+    const [checkoutObj, setCheckoutObj] = useState({});
+    const [checkoutBasketTrigger, setCheckoutBasketTrigger] = useState(false);
 
     useEffect(() => {
         setLoading(true);
         const getMovies = async () => {
-            const response = await fetch(`${GlobalVariables.baseUrl}api/movies`);
+            const response = await fetch(`${GlobalVariables.apiBaseUrl}api/movies`);
             const data = await response.json();
             setAllMovies(data);
             setLoading(false);
@@ -36,7 +38,7 @@ const MovieContextProvider = (props) => {
         const callAPI = async () => {
             if (callAPITrigger) {
                 setLoading(true);
-                const response = await fetch(`${GlobalVariables.baseUrl}api/${apiEndPoint}`);
+                const response = await fetch(`${GlobalVariables.apiBaseUrl}api/${apiEndPoint}`);
                 const data = await response.json();
                 setAPIResponse(data);
                 setLoading(false);
@@ -66,15 +68,36 @@ const MovieContextProvider = (props) => {
                     body: JSON.stringify(myBasket)
                 };
 
-                const response = await fetch(`${GlobalVariables.baseUrl}api/basket`, options);
+                const response = await fetch(`${GlobalVariables.apiBaseUrl}api/basket`, options);
                 const data = await response.json();
                 localStorage.setItem('basketid', data.id);
+                setAPIResponse([]);
                 setLoading(false);
                 setSaveBasketTrigger(false);
             }
         }
         callPersistsBasketData();
     }, [saveBasketTrigger])
+
+    useEffect(() => {        
+        const callCheckoutBasket = async () => {
+            if (checkoutBasketTrigger) {
+                setLoading(true);                                
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(checkoutObj)
+                };
+
+                const response = await fetch(`${GlobalVariables.apiBaseUrl}api/basket/checkout`, options);
+                setLoading(false);
+                setCheckoutBasketTrigger(false);
+            }
+        }
+        callCheckoutBasket();
+    }, [checkoutBasketTrigger])
 
     const selectedSeatToggle = (rowN, seatN) => {
         setAPIResponse(prev => {
@@ -146,6 +169,19 @@ const MovieContextProvider = (props) => {
         setCartItems(prev => prev.filter(item => item.movieId !== movieId));
     }
 
+    const setCheckoutAPICallParams = (checkoutInfo) => {
+        setCheckoutObj(checkoutInfo);
+    }
+
+    const checkoutBasket = () => {
+        setCheckoutBasketTrigger(true);
+    }
+
+    const deleteBasket = () => {
+        setCartItems([]);
+        localStorage.removeItem('basketid');
+    }
+
     return (
         <MovieContext.Provider value={{
             allMovies,
@@ -166,7 +202,10 @@ const MovieContextProvider = (props) => {
             showFooter,
             selectedSeatHandler,
             addItemToCart,
-            deleteCartItem
+            deleteCartItem,
+            setCheckoutAPICallParams,
+            checkoutBasket,
+            deleteBasket
         }}>
             {props.children}
         </MovieContext.Provider>

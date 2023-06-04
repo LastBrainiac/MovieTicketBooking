@@ -26,7 +26,7 @@ namespace MTBS.BasketAPI.Repository
 
         public async Task<CustomerBasket> SaveBasketAsync(CustomerBasket basket)
         {
-            var created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromHours(24));            
+            var created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromHours(1));            
             if (!created) return null;
             return await GetBasketAsync(basket.Id);
         }

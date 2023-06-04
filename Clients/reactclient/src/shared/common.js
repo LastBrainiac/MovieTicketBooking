@@ -19,10 +19,15 @@ const getScreeningData = () => {
         });
 }
 
-const mediumDateShortTime = new Intl.DateTimeFormat("hu", {
+const mediumDateShortTime = new Intl.DateTimeFormat('hu', {
     timeStyle: "short",
     dateStyle: "medium",
 });
+
+const shortDateShortTime = new Intl.DateTimeFormat('hu', {
+    timeStyle: "short",
+    dateStyle: "short",
+})
 
 const darkTheme = createTheme({
     palette: {
@@ -30,4 +35,4 @@ const darkTheme = createTheme({
     },
 });
 
-export { getScreeningData, mediumDateShortTime, darkTheme };
+export { getScreeningData, mediumDateShortTime, shortDateShortTime, darkTheme };

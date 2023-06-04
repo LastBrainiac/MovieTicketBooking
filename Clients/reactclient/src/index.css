@@ -8,6 +8,7 @@
   --available: rgb(179, 179, 179);
   --unavailable: hsl(0, 0%, 27%);
   --selected: rgb(255, 153, 0);
+  --successful-bg: rgb(255, 250, 233);
 }
 
 body, html {  

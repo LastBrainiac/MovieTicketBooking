@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "@mui/material";
 import { useContext } from 'react';
 import { MovieContext } from '../MovieContext';
@@ -18,10 +18,7 @@ import ForwardIcon from '@mui/icons-material/Forward';
 
 const ShoppingCart = () => {
     const { cartItems, deleteCartItem } = useContext(MovieContext);
-
-    const clickHandler = () => {
-        console.log('forward clicked')
-    }
+    const navigate = useNavigate();
 
     const total = () => {
         return cartItems.map(item => item.ticketPrice * item.ticketQuantity).reduce((sum, i) => sum + i, 0);
@@ -34,6 +31,7 @@ const ShoppingCart = () => {
                     <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
                 </Tooltip>
             </Link>
+            <h2>My Bookings</h2>
             <div className='cart-items'>
                 {
                     cartItems && cartItems.length > 0
@@ -77,7 +75,7 @@ const ShoppingCart = () => {
                                 </TableContainer>
                             </ThemeProvider>
                             <div className="add-to-cart btn-forward">
-                                <button className="btn btn-add-to-cart" onClick={clickHandler}>                                    
+                                <button className="btn btn-add-to-cart" onClick={() => navigate('/userinfo')}>
                                     <ForwardIcon sx={{ fontSize: '3em' }} />
                                 </button>
                             </div>

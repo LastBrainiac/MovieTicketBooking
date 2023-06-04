@@ -4,14 +4,9 @@ import { MovieContext } from "../../../MovieContext";
 
 const TabContent = () => {
     const { selectedMovie, storeScreeningTime } = useContext(MovieContext);
-
-    const clickHandler = (time) => {
-        storeScreeningTime(time);
-    }
-
     const screeningTimeButtons = selectedMovie?.startTimes?.map(time => {
         return (
-            <Link className="start-times" to='/selectseat' onClick={() => clickHandler(time)} key={time}>
+            <Link className="start-times" to='/selectseat' onClick={() => storeScreeningTime(time)} key={time}>
                 <p>{time}</p>
             </Link>
         )

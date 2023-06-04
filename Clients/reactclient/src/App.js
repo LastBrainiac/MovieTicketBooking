@@ -9,12 +9,12 @@ import { useContext } from 'react';
 import { MovieContext } from './MovieContext';
 import SeatSelection from './pages/SeatSelection';
 import ShoppingCart from './components/ShoppingCart';
+import UserInfo from './pages/UserInfo';
 
 function App() {
   const { loading, hideFooter } = useContext(MovieContext);
+  window.onbeforeunload = () => {return false;}
 
-  // window.onbeforeunload = () => {return false;}
-  
   return (
     <div>
       <Header />
@@ -24,6 +24,7 @@ function App() {
         <Route path='/screening' element={<ScreeningTimes />} />
         <Route path='/selectseat' element={<SeatSelection />} />
         <Route path='/cart' element={<ShoppingCart />} />
+        <Route path='/userinfo' element={<UserInfo />} />
       </Routes>
       {!loading && !hideFooter && <Footer />}
     </div>

@@ -23,7 +23,7 @@ const SelectionFooter = () => {
             movieTitle: selectedMovie.title,
             ticketQuantity: selectedSeats.length,
             ticketPrice: GlobalVariables.ticketPrice,
-            screeningDate: new Date(`${screeningShortDate} ${screeningTime}`).toISOString(),
+            screeningDate: new Date(`${screeningShortDate} ${screeningTime}`),
             bookedSeats: selectedSeats
         }
         addItemToCart(cartItem);

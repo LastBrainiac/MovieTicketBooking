@@ -11,7 +11,7 @@ const SeatSelection = () => {
     const { screeningShortDate, screeningTime, selectedMovie, invokeAPIMethod, showFooter } = useContext(MovieContext);
 
     useEffect(() => {
-        invokeAPIMethod(`booking?movieid=${selectedMovie.id}&screeningdate=${screeningShortDate} ${screeningTime}`, true);
+        invokeAPIMethod(`booking?movieid=${selectedMovie.id}&screeningdate=${new Date(`${screeningShortDate} ${screeningTime}`).toISOString()}`, true);
     }, []);
 
     return (
