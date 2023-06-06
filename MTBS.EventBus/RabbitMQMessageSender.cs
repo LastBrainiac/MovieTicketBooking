@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Polly;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Exceptions;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -26,9 +28,9 @@ namespace MTBS.EventBus
             {
                 using var channel = _connection.CreateModel();
                 channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
-                var options = new JsonSerializerOptions 
-                { 
-                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping 
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 };
                 var json = JsonSerializer.Serialize(message, options);
                 var body = Encoding.UTF8.GetBytes(json);
@@ -46,7 +48,17 @@ namespace MTBS.EventBus
                     UserName = _username,
                     Password = _password
                 };
-                _connection = factory.CreateConnection();
+
+                var retry = Policy.Handle<BrokerUnreachableException>()
+                    .WaitAndRetry(
+                    retryCount: 5,
+                    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+                    );
+
+                retry.Execute(() =>
+                {
+                    _connection = factory.CreateConnection();
+                });
             }
             catch (Exception)
             {

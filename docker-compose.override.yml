@@ -1,0 +1,101 @@
+version: '3.4'
+
+services:
+  mssql:
+    container_name: mssql
+    restart: always
+    environment:
+        ACCEPT_EULA: "Y"
+        MSSQL_SA_PASSWORD: "Mtbs2023*"
+    ports:
+        - "1533:1433"
+
+  redis:
+    container_name: redis
+    restart: always
+    ports:
+        - "6379:6379"
+    volumes:
+        - redis_data:/data
+
+  redis-commander:
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=root
+      - HTTP_PASSWORD=secret
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+
+  mongodb:
+    container_name: mongodb
+    restart: always
+    ports:
+        - "27017:27017"
+    volumes:
+        - mongo_data:/data/db
+
+  rabbitmq:
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+
+  mtbs.apigateway:
+    container_name: mtbs.apigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+        - mtbs.basketapi
+        - mtbs.bookingapi
+        - mtbs.moviecatalogapi
+    ports:
+      - "5500:80"
+
+  mtbs.basketapi:
+    container_name: mtbs.basketapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:Redis=redis:6379"
+      - "EventBus:HostName=rabbitmq"
+      - "EventBus:UserName=guest"
+      - "EventBus:Password=guest" 
+    ports:
+      - "5401:80"
+
+
+  mtbs.bookingapi:
+    container_name: mtbs.bookingapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=mssql;Database=MTBSBookingAPI;User Id=sa;Password=Mtbs2023*;TrustServerCertificate=true"
+      - "EventBus:HostName=rabbitmq"
+      - "EventBus:UserName=guest"
+      - "EventBus:Password=guest"  
+    ports:
+      - "5402:80"
+
+
+  mtbs.moviecatalogapi:
+    container_name: mtbs.moviecatalogapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "MovieDatabase:ConnectionString=mongodb://mongodb:27017"
+      - "MovieDatabase:DatabaseName=moviedb"
+      - "MovieDatabase:MoviesCollectionName=movies"
+    ports:
+      - "5400:80"
+
+
+  mtbs.notificationapi:
+    container_name: mtbs.notificationapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=mssql;Database=MTBSNotificationAPI;User Id=sa;Password=Mtbs2023*;TrustServerCertificate=true"
+      - "EventBus:HostName=rabbitmq"
+      - "EventBus:UserName=guest"
+      - "EventBus:Password=guest"  
+    ports:
+      - "5403:80"
+

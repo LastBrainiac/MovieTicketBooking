@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "mtbs.apigateway": "StartDebugging",
+        "mtbs.basketapi": "StartDebugging",
+        "mtbs.bookingapi": "StartDebugging",
+        "mtbs.moviecatalogapi": "StartDebugging",
+        "mtbs.notificationapi": "StartDebugging"
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+version: '3.4'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  
+  redis:
+    image: redis:latest
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+
+  mongodb:
+    image: mongo
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  mtbs.apigateway:
+    image: ${DOCKER_REGISTRY-}mtbsapigateway
+    build:
+      context: .
+      dockerfile: MTBS.APIGateway/Dockerfile
+
+  mtbs.basketapi:
+    image: ${DOCKER_REGISTRY-}mtbsbasketapi
+    build:
+      context: .
+      dockerfile: MTBS.BasketAPI/Dockerfile
+
+
+  mtbs.bookingapi:
+    image: ${DOCKER_REGISTRY-}mtbsbookingapi
+    build:
+      context: .
+      dockerfile: MTBS.BookingAPI/Dockerfile
+
+
+  mtbs.moviecatalogapi:
+    image: ${DOCKER_REGISTRY-}mtbsmoviecatalogapi
+    build:
+      context: .
+      dockerfile: MTBS.MovieCatalogAPI/Dockerfile
+
+
+  mtbs.notificationapi:
+    image: ${DOCKER_REGISTRY-}mtbsnotificationapi
+    build:
+      context: .
+      dockerfile: MTBS.NotificationAPI/Dockerfile
+
+volumes:
+    redis_data:
+    mongo_data:
+
+
+  

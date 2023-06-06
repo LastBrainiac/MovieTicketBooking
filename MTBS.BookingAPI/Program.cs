@@ -40,6 +40,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
-app.UseAutoMigration();
+app.UseAutoMigration<APIDbContext>();
 
 app.Run();

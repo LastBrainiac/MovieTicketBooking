@@ -167,6 +167,7 @@ const MovieContextProvider = (props) => {
 
     const deleteCartItem = (movieId) => {
         setCartItems(prev => prev.filter(item => item.movieId !== movieId));
+        setSaveBasketTrigger(true);
     }
 
     const setCheckoutAPICallParams = (checkoutInfo) => {
