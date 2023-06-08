@@ -46,7 +46,7 @@ const SelectionFooter = () => {
                 <div className="add-to-cart">
                     <button className="btn btn-add-to-cart" onClick={clickHandler}>
                         <Tooltip title='Add to My Bookings' placement="top">
-                            <AddIcon sx={{ fontSize: '3em' }} />
+                            <AddIcon sx={{ fontSize: '2.5em' }} />
                         </Tooltip>
                     </button>
                 </div>

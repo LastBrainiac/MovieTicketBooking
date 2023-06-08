@@ -28,7 +28,7 @@ const UserInfo = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 600,
+        width: 300,
         bgcolor: 'var(--successful-bg)',
         color: 'black',
         border: '2px solid #000',

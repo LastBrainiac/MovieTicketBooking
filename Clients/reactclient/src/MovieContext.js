@@ -148,6 +148,7 @@ const MovieContextProvider = (props) => {
 
     const showFooter = () => {
         setHideFooter(false);
+        setSelectedSeats([]);
     }
 
     const selectedSeatHandler = (seat, flag) => {
@@ -162,6 +163,7 @@ const MovieContextProvider = (props) => {
         if (!cartItems.find(cartItem => cartItem.movieId === item.movieId)) {
             setCartItems(prev => [...prev, item]);
             setSaveBasketTrigger(true);
+            setSelectedSeats([]);
         }
     }
 

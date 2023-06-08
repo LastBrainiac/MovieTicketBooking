@@ -4,14 +4,6 @@ import { Tooltip } from "@mui/material";
 import { useContext } from 'react';
 import { MovieContext } from '../MovieContext';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { ThemeProvider } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import * as Common from '../shared/common';
 import ForwardIcon from '@mui/icons-material/Forward';
@@ -37,46 +29,40 @@ const ShoppingCart = () => {
                     cartItems && cartItems.length > 0
                         ?
                         <div className='items-container'>
-                            <ThemeProvider theme={Common.darkTheme}>
-                                <TableContainer component={Paper}>
-                                    <Table sx={{ minWidth: 400 }}>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Movie Title</TableCell>
-                                                <TableCell align="right">Screening Date</TableCell>
-                                                <TableCell align="right">Ticket Quantity</TableCell>
-                                                <TableCell align="right">Ticket Price</TableCell>
-                                                <TableCell align="right">Subtotal</TableCell>
-                                                <TableCell></TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {cartItems.map((cartItem, index) => (
-                                                <TableRow key={index}>
-                                                    <TableCell component="th" scope="row">
-                                                        {cartItem.movieTitle}
-                                                    </TableCell>
-                                                    <TableCell align="right">{Common.mediumDateShortTime.format(new Date(cartItem.screeningDate))}</TableCell>
-                                                    <TableCell align="right">{cartItem.ticketQuantity}</TableCell>
-                                                    <TableCell align="right">{cartItem.ticketPrice.toLocaleString('hu-HU', { style: 'currency', currency: 'HUF' })}</TableCell>
-                                                    <TableCell align="right">{(cartItem.ticketQuantity * cartItem.ticketPrice).toLocaleString('hu-HU', { style: 'currency', currency: 'HUF' })}</TableCell>
-                                                    <TableCell align="right">
-                                                        <DeleteIcon className="delete" onClick={() => deleteCartItem(cartItem.movieId)} />
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                            <TableRow sx={{ '&:last-child td': { border: 0 } }}>
-                                                <TableCell rowSpan={2} />
-                                                <TableCell align='right' colSpan={3}>Total</TableCell>
-                                                <TableCell align="right">{total().toLocaleString('hu-HU', { style: 'currency', currency: 'HUF' })}</TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>
-                            </ThemeProvider>
+                            <table className="table-items">
+                                <thead>
+                                    <tr className='title-row'>
+                                        <th className='t-left'>Movie Title</th>
+                                        <th className='t-right'>Screening Date</th>
+                                        <th className='t-right'>Ticket Quantity</th>
+                                        <th className='t-right'>Ticket Price</th>
+                                        <th className='t-right'>Subtotal</th>
+                                        <th className='t-right'></th>
+                                    </tr>
+                                </thead>
+                                <tbody className='t-body'>
+                                    {cartItems.map((cartItem, index) => (
+                                        <tr key={index}>
+                                            <td>{cartItem.movieTitle}</td>
+                                            <td className='t-right'>{Common.mediumDateShortTime.format(new Date(cartItem.screeningDate))}</td>
+                                            <td className='t-right'>{cartItem.ticketQuantity}</td>
+                                            <td className='t-right'>{cartItem.ticketPrice}</td>
+                                            <td className='t-right'>{(cartItem.ticketQuantity * cartItem.ticketPrice)}</td>
+                                            <td className='t-center'><DeleteIcon className="delete" onClick={() => deleteCartItem(cartItem.movieId)} /></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr className='t-foot'>
+                                        <td colSpan="3"></td>
+                                        <td><strong>Total</strong></td>
+                                        <td><strong>{total()}&nbsp;HUF</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                             <div className="add-to-cart btn-forward">
                                 <button className="btn btn-add-to-cart" onClick={() => navigate('/userinfo')}>
-                                    <ForwardIcon sx={{ fontSize: '3em' }} />
+                                    <ForwardIcon sx={{ fontSize: '2.5em' }} />
                                 </button>
                             </div>
                         </div>
