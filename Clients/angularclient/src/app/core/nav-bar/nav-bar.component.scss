@@ -1,0 +1,14 @@
+a {
+    text-decoration: none;
+    color: #343a40;
+
+    &.active {
+        color: rgb(1, 173, 150);
+        font-weight: 500;
+    }
+}
+
+.logo {
+    cursor: pointer;
+    margin-right: 5em;
+}

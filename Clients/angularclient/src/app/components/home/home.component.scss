@@ -1,0 +1,69 @@
+.featured {
+    height: 150px;
+
+    & p {
+        margin: 0;
+        padding-top: 1.4em;
+        text-align: center;
+        color: gray;
+    }
+}
+
+img {
+    display: block;
+    object-position: center;
+    object-fit: cover;
+    height: 85vh;
+    width: 100%;
+}
+
+.main-container {
+    background-color: #dbdbdb;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.movie-slide {
+    position: relative;
+}
+
+.movie-details {
+    position: absolute;
+    left: 3em;
+    bottom: 3em;
+
+    & h1,
+    p {
+        color: white;
+        text-shadow: 0 0 10px black;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    & h1 {
+        font-size: 3em;
+    }
+
+    & p {
+        font-size: 1.5em;
+    }
+}
+
+.flipped-word span {
+    display: inline-block;
+    font-size: 3em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0px 5px rgb(65, 65, 65);
+    text-transform: uppercase;
+    animation: flip 6s infinite;
+    animation-delay: calc(1s * var(--i))
+}
+
+@keyframes flip {
+
+    0%,
+    80% {
+        transform: rotateY(360deg)
+    }
+}

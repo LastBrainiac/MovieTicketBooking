@@ -1,0 +1,39 @@
+<div class="main-container">
+    <carousel [isAnimated]="true">
+        <slide *ngFor="let movie of cinemaSvc.movieSource$ | async" class="movie-slide">
+            <img [src]="movie.thumbnailPic | base64: 'image/jpg'" alt="slide">
+            <div class="movie-details">
+                <h1>{{movie.title}}</h1>
+                <p>{{movie.releaseYear}} - {{movie.genre}} - {{movie.movieLength}}</p>
+            </div>
+        </slide>
+    </carousel>
+    <section class="featured">
+        <div class="d-flex justify-content-center pt-2 text-uppercase shadow-sm">
+            <div class="flipped-word">
+                <span style="--i:1">w</span>
+                <span style="--i:1">e</span>
+                <span style="--i:1">l</span>
+                <span style="--i:1">c</span>
+                <span style="--i:1">o</span>
+                <span style="--i:1">m</span>
+                <span style="--i:1">e</span>
+                <span style="--i:1">&nbsp;</span>
+                <span style="--i:2">t</span>
+                <span style="--i:2">o</span>
+                <span style="--i:2">&nbsp;</span>
+                <span style="--i:3">o</span>
+                <span style="--i:3">u</span>
+                <span style="--i:3">r</span>
+                <span style="--i:3">&nbsp;</span>
+                <span style="--i:4">c</span>
+                <span style="--i:4">i</span>
+                <span style="--i:4">n</span>
+                <span style="--i:4">e</span>
+                <span style="--i:4">m</span>
+                <span style="--i:4">a</span>
+            </div>
+        </div>
+        <p className="copyright">Movie Ticket Booking, Created By Attila Ludanszki 2023</p>
+    </section>
+</div>
