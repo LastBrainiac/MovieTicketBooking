@@ -1,9 +1,8 @@
 .featured {
-    height: 150px;
-
-    & p {
+    p {
         margin: 0;
-        padding-top: 1.4em;
+        font-size: .75em;
+        padding-top: 1em;
         text-align: center;
         color: gray;
     }
@@ -13,13 +12,15 @@ img {
     display: block;
     object-position: center;
     object-fit: cover;
-    height: 85vh;
+    height: 55vh;
     width: 100%;
 }
 
 .main-container {
-    background-color: #dbdbdb;
+    padding-top: 5em;
+    background-color: #a4b3c0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100%;
 }
 
 .movie-slide {
@@ -28,36 +29,41 @@ img {
 
 .movie-details {
     position: absolute;
-    left: 3em;
-    bottom: 3em;
+    left: 1.5em;
+    bottom: 2.5em;
+    border-radius: 25px 4px;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .45) inset;
 
-    & h1,
+    h1,
     p {
         color: white;
         text-shadow: 0 0 10px black;
         font-weight: 500;
         margin: 0;
+        opacity: .75;
     }
 
-    & h1 {
-        font-size: 3em;
+    h1 {
+        font-size: 1.4em;
     }
 
-    & p {
-        font-size: 1.5em;
+    p {
+        font-size: .7em;
     }
 }
 
 .flipped-word span {
     display: inline-block;
-    font-size: 3em;
+    font-size: 1.4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 900;
+    font-weight: 500;
     color: rgb(255, 255, 255);
     text-shadow: 0 0px 5px rgb(65, 65, 65);
     text-transform: uppercase;
-    animation: flip 6s infinite;
-    animation-delay: calc(1s * var(--i))
+    animation: flip 8s infinite;
+    animation-delay: calc(.8s * var(--i))
 }
 
 @keyframes flip {
@@ -65,5 +71,69 @@ img {
     0%,
     80% {
         transform: rotateY(360deg)
+    }
+}
+
+@media (min-width: 550px) {
+
+    .featured {
+        p {
+            font-size: .9em;
+            padding-top: 1em;
+        }
+    }
+
+    img {
+        height: 75vh;
+    }
+
+    .movie-details {
+        left: 3em;
+        bottom: 3em;
+        border-radius: 40px 8px;
+        padding: 2em;
+        background-color: rgba(0, 0, 0, .3);
+        box-shadow: 0 0 15px rgba(0, 0, 0, .45) inset;
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: .9em;
+        }
+    }
+
+    .flipped-word span {
+        font-size: 2em;
+        font-weight: 900;
+        text-shadow: 0 0px 5px rgb(65, 65, 65);
+    }
+}
+
+@media (min-width: 1040px) {
+
+    .featured {
+        p {
+            font-size: 1em;
+            padding-top: 1.4em;
+        }
+    }
+
+    .movie-details {
+
+        h1 {
+            font-size: 4em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+    }
+
+    .flipped-word span {
+        font-size: 2.9em;
+        font-weight: 900;
+        text-shadow: 0 0px 5px rgb(65, 65, 65);
     }
 }

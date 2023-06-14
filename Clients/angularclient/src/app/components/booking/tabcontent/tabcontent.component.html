@@ -1,0 +1,13 @@
+<div class="movie-sessions">
+    <p class="selected-date">{{selectedDate}}</p>
+    <div class="movies">
+        <ng-container *ngFor="let movie of movieList">
+            <div class="movie-card">
+                <img [src]="movie.thumbnailPic | base64: 'image/jpg'" alt={{movie.title}}>
+                <div class="movie-details">
+                    <app-movie-details [movie]="movie" [item]="item" />
+                </div>
+            </div>
+        </ng-container>        
+    </div>
+</div>

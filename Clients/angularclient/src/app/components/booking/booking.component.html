@@ -1,1 +1,9 @@
-<p>booking works!</p>
+<div class="main-container">
+    <mat-tab-group animationDuration="500ms">
+        <div *ngFor="let item of screeningData">
+            <mat-tab label={{item.dayName}}>
+                <app-tabcontent [item]="item"></app-tabcontent>
+            </mat-tab>
+        </div>        
+    </mat-tab-group>
+</div>

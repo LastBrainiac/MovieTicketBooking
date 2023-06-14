@@ -19,14 +19,16 @@ const getScreeningData = () => {
         });
 }
 
-const mediumDateShortTime = new Intl.DateTimeFormat('hu', {
+const mediumDateShortTime = new Intl.DateTimeFormat('en', {
     timeStyle: "short",
     dateStyle: "medium",
+    hour12: false
 });
 
-const shortDateShortTime = new Intl.DateTimeFormat('hu', {
+const shortDateShortTime = new Intl.DateTimeFormat('en', {
     timeStyle: "short",
     dateStyle: "short",
+    hour12: false
 })
 
 const darkTheme = createTheme({

@@ -1,6 +1,7 @@
-a {
+.menu-item {
     text-decoration: none;
     color: #343a40;
+    font-size: 1.2em;
 
     &.active {
         color: rgb(1, 173, 150);
@@ -10,5 +11,19 @@ a {
 
 .logo {
     cursor: pointer;
-    margin-right: 5em;
+    max-height: 30px;
+    margin-right: 2em;
+}
+
+
+@media (min-width: 550px) {
+    
+    .menu-item {
+        font-size: 1.5em;
+    }
+
+    .logo {
+        max-height: 50px;
+        margin-right: 5em;
+    }
 }
