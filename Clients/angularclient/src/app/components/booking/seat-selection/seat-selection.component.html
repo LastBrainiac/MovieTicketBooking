@@ -1,1 +1,46 @@
-<p style="padding-top: 6em;">seat-selection works!</p>
+<div class="seat-selection-container">
+    <div class="seat-selection-header text-uppercase">
+        <p>{{selectedMovie?.title}}</p>
+        <mat-divider [vertical]="true"></mat-divider>
+        <p>{{selectedMovie?.releaseYear}}</p>
+        <mat-divider [vertical]="true"></mat-divider>
+        <p>{{selectedMovie?.genre}}</p>
+        <mat-divider [vertical]="true"></mat-divider>
+        <p>{{selectedMovie?.movieLength}}</p>
+        <mat-divider [vertical]="true"></mat-divider>
+        <p class="start-time">{{screeningDate}}</p>
+    </div>
+    <div class="seat-selection-body">
+        <div class="title-container">
+            <p class="select-title text-uppercase">Select your seats!</p>
+            <mat-icon fontIcon="close" [routerLink]="['/booking']" matTooltip="Back to movie selection"></mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-square legend-available"></div>
+                <p class="legend-title">Available</p>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square legend-unavailable"></div>
+                <p class="legend-title">Booked</p>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square legend-selected"></div>
+                <p class="legend-title">Selected</p>
+            </div>
+        </div>
+        <div class="viewing-area">
+            <div class="rows" *ngFor="let row of viewingArea?.rows">
+                <p class="row-number">{{row.rowNumber}}.</p>
+                <div class="seats" *ngFor="let seat of row.seats">
+                    <div class="seat"
+                        [ngClass]="{'seat-color-available': !seat.booked, 'seat-color-booked':seat.booked, 'seat-color-selected': seat.isSelected}"
+                        (click)="onSeatClicked({row: row.rowNumber, number: seat.seatNumber}, seat.booked, seat.isSelected)">
+                        {{seat.seatNumber}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

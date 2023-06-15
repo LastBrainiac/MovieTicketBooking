@@ -10,6 +10,9 @@ import { MovieDetailsComponent } from './booking/tabcontent/movie-details/movie-
 import { SeatSelectionComponent } from './booking/seat-selection/seat-selection.component';
 import { UserInfoComponent } from './booking/user-info/user-info.component';
 import { ComponentsRoutingModule } from './components-routing.module';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -18,14 +21,17 @@ import { ComponentsRoutingModule } from './components-routing.module';
     TabcontentComponent,
     MovieDetailsComponent,
     SeatSelectionComponent,
-    UserInfoComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,
     CarouselModule,
     SharedModule,
     MatTabsModule,
-    ComponentsRoutingModule
+    ComponentsRoutingModule,
+    MatDividerModule,
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class ComponentsModule { }
