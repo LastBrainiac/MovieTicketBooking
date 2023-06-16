@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MTBS.BasketAPI.Models;
 using MTBS.BookingAPI.Controllers;
 using MTBS.BookingAPI.Models;
@@ -11,10 +12,12 @@ namespace APITests
     public class BookingAPITest
     {
         private readonly Mock<IBookingRepository> _repository;
-
+        private readonly Mock<IMapper> _mapper;
+        
         public BookingAPITest()
         {
             _repository = new Mock<IBookingRepository>();
+            _mapper = new Mock<IMapper>();
         }
 
         [Fact]
@@ -27,7 +30,7 @@ namespace APITests
             _repository.Setup(p => p.GetFullSeatListAsync(movieId, screeningDate))
                 .Returns(Task.FromResult(seatList));
 
-            var bookingController = new BookingController(_repository.Object);
+            var bookingController = new BookingController(_repository.Object, _mapper.Object);
 
             var response = await bookingController.GetSeatListByMovieAndDate(movieId, screeningDate);
 
