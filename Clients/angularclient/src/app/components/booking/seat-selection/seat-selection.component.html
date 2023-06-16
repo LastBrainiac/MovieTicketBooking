@@ -42,5 +42,9 @@
                 </div>
             </div>
         </div>
+        <mat-divider></mat-divider>
+        <div class="next">
+            <button class="btn-next" (click)="onButtonClicked()" [disabled]="selectedSeats?.length === 0">Next</button>
+        </div>
     </div>
 </div>

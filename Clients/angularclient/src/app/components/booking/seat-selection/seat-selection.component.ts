@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SeatSelectionService } from './seat-selection.service';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ViewingArea } from 'src/app/models/viewingArea';
 import { CinemaService } from '../../home/cinema.service';
 import { Movie } from 'src/app/models/movie';
 import { SelectedSeat } from 'src/app/models/selectedSeat';
+import { BookingService } from '../booking.service';
 
 @Component({
   selector: 'app-seat-selection',
@@ -19,8 +19,9 @@ export class SeatSelectionComponent implements OnInit {
   selectedSeats?: SelectedSeat[] = [];
 
   constructor(private route: ActivatedRoute,
-    private seatSvc: SeatSelectionService,
-    private cinemaSvc: CinemaService) { }
+    private bookingSvc: BookingService,
+    private cinemaSvc: CinemaService,
+    private routing: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(
@@ -30,7 +31,7 @@ export class SeatSelectionComponent implements OnInit {
       }
     )
 
-    this.seatSvc.getViewingAreaByMovieAndDate(this.movieId!, new Date(this.screeningDate!).toISOString())
+    this.bookingSvc.getViewingAreaByMovieAndDate(this.movieId!, new Date(this.screeningDate!).toISOString())
       .subscribe({
         next: resp => this.viewingArea = resp,
         error: err => console.log(err)
@@ -41,20 +42,21 @@ export class SeatSelectionComponent implements OnInit {
     )
   }
 
+  onButtonClicked() {
+    const navExtras: NavigationExtras = { state: this.selectedSeats };
+    this.routing.navigate(['/booking/userinfo'], navExtras);
+  }
+
   onSeatClicked(seat: SelectedSeat, isBooked: boolean, isSelected: boolean) {
     if (!isBooked) {
       if (!isSelected) {
         if (!this.selectedSeats?.find(s => s.row === seat.row && s.number === seat.number)) this.selectedSeats?.push(seat);
       } else {
-        if (this.selectedSeats?.find(s => s.row === seat.row && s.number === seat.number)) {
-          let index = this.selectedSeats.findIndex(s => s.row === seat.row && s.number === seat.number);
-          this.selectedSeats.splice(index, 1);
-        }
+        const index: any = this.selectedSeats?.findIndex(s => s.row === seat.row && s.number === seat.number);
+        this.selectedSeats?.splice(index, 1);
       }
       this.viewingArea = this.getViewingArea(seat);
     }
-    console.log(this.selectedSeats)
-    // console.log(this.viewingArea)
   }
 
   private getViewingArea(seat: SelectedSeat): ViewingArea {

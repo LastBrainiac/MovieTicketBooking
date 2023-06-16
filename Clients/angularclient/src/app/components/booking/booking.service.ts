@@ -1,17 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BookingHeader } from 'src/app/models/booking';
 import { ViewingArea } from 'src/app/models/viewingArea';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SeatSelectionService {
+export class BookingService {
   baseUrl: string = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
   getViewingAreaByMovieAndDate(movieId: string, screeningDate: string) {
     return this.http.get<ViewingArea>(`${this.baseUrl}booking?movieid=${movieId}&screeningdate=${screeningDate}`);
+  }
+
+  saveBookingData(booking: BookingHeader) {
+    this.http.post(`${this.baseUrl}booking`, booking);
   }
 }

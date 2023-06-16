@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using MTBS.BookingAPI.Models;
 using MTBS.BookingAPI.Models.Dtos;
 using MTBS.BookingAPI.Repositories;
 
@@ -9,10 +11,12 @@ namespace MTBS.BookingAPI.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingRepository _bookingRepository;
+        private readonly IMapper _mapper;
 
-        public BookingController(IBookingRepository bookingRepository)
+        public BookingController(IBookingRepository bookingRepository, IMapper mapper)
         {
             _bookingRepository = bookingRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,6 +28,13 @@ namespace MTBS.BookingAPI.Controllers
             }
             var viewingArea = await _bookingRepository.GetFullSeatListAsync(movieId, screeningDate);
             return Ok(viewingArea);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SaveBookingData(BookingHeaderDto bookingHeaderDto)
+        {
+            await _bookingRepository.SaveBookingDataAsync(_mapper.Map<BookingHeader>(bookingHeaderDto));
+            return Ok();
         }
     }
 }

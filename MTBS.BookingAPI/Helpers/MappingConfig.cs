@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MTBS.BookingAPI.EventBusIntegration.Messages;
 using MTBS.BookingAPI.Models;
+using MTBS.BookingAPI.Models.Dtos;
 
 namespace MTBS.BookingAPI.Helpers
 {
@@ -25,6 +26,12 @@ namespace MTBS.BookingAPI.Helpers
                 .ForMember(d => d.BookingId, o => o.MapFrom(s => s.Id))
                 .ForMember(d => d.Id, o => o.Ignore())
                 .ForMember(d => d.MessageCreated, o => o.Ignore());
+
+            CreateMap<BookingHeaderDto, BookingHeader>();
+            CreateMap<BookingDetailsDto, BookingDetails>();
+            CreateMap<ReservedSeatDto, ReservedSeat>()
+                .ForMember(q => q.SeatNumber, o => o.MapFrom(s => s.Seat))
+                .ForMember(q => q.RowNumber, o => o.MapFrom(s => s.Row));
         }
     }
 }

@@ -153,3 +153,28 @@
     background-color: var(--selected);
     color: black;
 }
+
+.next {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-next {
+    margin-top: 1em;
+    margin-right: 1em;
+    padding: .5em 2em;
+    border: none;
+    background-color: var(--border-color);
+    box-shadow: 0 0 3px gray;
+    border-radius: 5px;
+
+    &:not([disabled]):hover {
+        background-color: rgb(105, 105, 105);
+        color: whitesmoke;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}

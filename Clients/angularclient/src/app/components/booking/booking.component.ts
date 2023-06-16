@@ -15,6 +15,4 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
     this.screeningData = Helper.getScreeningData();
   }
-
-
 }
