@@ -32,6 +32,11 @@ namespace MTBS.BookingAPI.Helpers
             CreateMap<ReservedSeatDto, ReservedSeat>()
                 .ForMember(q => q.SeatNumber, o => o.MapFrom(s => s.Seat))
                 .ForMember(q => q.RowNumber, o => o.MapFrom(s => s.Row));
+
+            CreateMap<BookingHeaderDto, EmailLogMessage>()
+                .ForMember(d => d.BookingId, o => o.MapFrom(s => s.Id))
+                .ForMember(d => d.Id, o => o.Ignore())
+                .ForMember(d => d.MessageCreated, o => o.Ignore());
         }
     }
 }

@@ -5,7 +5,7 @@ namespace MTBS.BookingAPI.Repositories
 {
     public interface IBookingRepository
     {
-        Task SaveBookingDataAsync(BookingHeader bookingHeader);
+        Task<int> SaveBookingDataAsync(BookingHeader bookingHeader);
         Task<ViewingAreaRowDTO> GetFullSeatListAsync(string movieId, DateTime screeningDate);
     }
 }

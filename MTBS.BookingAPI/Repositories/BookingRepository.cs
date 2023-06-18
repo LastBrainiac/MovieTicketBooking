@@ -37,10 +37,11 @@ namespace MTBS.BookingAPI.Repositories
             return viewingArea;
         }
 
-        public async Task SaveBookingDataAsync(BookingHeader bookingHeader)
+        public async Task<int> SaveBookingDataAsync(BookingHeader bookingHeader)
         {
             _dbContext.BookingHeaders.Add(bookingHeader);
             await _dbContext.SaveChangesAsync();
+            return bookingHeader.Id;
         }
     }
 }
