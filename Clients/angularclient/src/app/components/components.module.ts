@@ -13,6 +13,8 @@ import { ComponentsRoutingModule } from './components-routing.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ComponentsRoutingModule,
     MatDividerModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class ComponentsModule { }

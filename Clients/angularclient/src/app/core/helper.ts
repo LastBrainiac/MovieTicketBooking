@@ -15,8 +15,7 @@ export class Helper {
                     {
                         shortDate: this.currentDay(index).toISOString().split('T')[0],
                         day: this.currentDay(index).toLocaleDateString('en-US', { day: 'numeric' }),
-                        dayName: this.currentDay(index).toLocaleDateString('en-US', { weekday: 'long' }),
-                        isSelected: false
+                        dayName: this.currentDay(index).toLocaleDateString('en-US', { weekday: 'long' })
                     }
                 )
             });

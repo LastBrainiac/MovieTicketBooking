@@ -133,7 +133,14 @@
     width: 50px;
     height: 35px;
     border-radius: 5px;
-    box-shadow: 0 0 4px rgb(85, 85, 85);    
+    box-shadow: 0 0 4px rgb(141, 141, 141);  
+    transition: all 0.15s linear;  
+
+    &:not(.seat-color-booked, .seat-color-selected):hover {
+        transform: scale(1.15);
+        background-color: rgb(175, 255, 202);
+        color: darkgreen;
+    }
 }
 
 .seat-color-available,

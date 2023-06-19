@@ -63,6 +63,9 @@ services:
       - "EventBus:Password=guest" 
     ports:
       - "5401:80"
+    depends_on:
+        - redis
+        - rabbitmq
 
 
   mtbs.bookingapi:
@@ -75,6 +78,9 @@ services:
       - "EventBus:Password=guest"  
     ports:
       - "5402:80"
+    depends_on:
+        - mssql
+        - rabbitmq
 
 
   mtbs.moviecatalogapi:
@@ -86,6 +92,8 @@ services:
       - "MovieDatabase:MoviesCollectionName=movies"
     ports:
       - "5400:80"
+    depends_on:
+        - mongodb
 
 
   mtbs.notificationapi:
@@ -98,4 +106,6 @@ services:
       - "EventBus:Password=guest"  
     ports:
       - "5403:80"
-
+    depends_on:
+        - mssql
+        - rabbitmq

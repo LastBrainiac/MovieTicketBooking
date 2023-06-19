@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ViewingArea } from 'src/app/models/viewingArea';
 import { CinemaService } from '../../home/cinema.service';
 import { Movie } from 'src/app/models/movie';
 import { SelectedSeat } from 'src/app/models/selectedSeat';
 import { BookingService } from '../booking.service';
+import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-seat-selection',
@@ -12,6 +14,8 @@ import { BookingService } from '../booking.service';
   styleUrls: ['./seat-selection.component.scss']
 })
 export class SeatSelectionComponent implements OnInit {
+  @ViewChild('template', { static: true }) modalWindow?: TemplateRef<any>;
+
   movieId?: string;
   screeningDate?: string;
   viewingArea?: ViewingArea;
@@ -21,7 +25,8 @@ export class SeatSelectionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private bookingSvc: BookingService,
     private cinemaSvc: CinemaService,
-    private routing: Router) { }
+    private routing: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(
@@ -42,20 +47,32 @@ export class SeatSelectionComponent implements OnInit {
     )
   }
 
+  showNotification() {
+    this.dialog.open(this.modalWindow!);
+  }
+
   onButtonClicked() {
     const navExtras: NavigationExtras = { state: this.selectedSeats };
     this.routing.navigate(['/booking/userinfo'], navExtras);
   }
 
   onSeatClicked(seat: SelectedSeat, isBooked: boolean, isSelected: boolean) {
+    let ticketCountReachedMaxValue = false;
     if (!isBooked) {
       if (!isSelected) {
-        if (!this.selectedSeats?.find(s => s.row === seat.row && s.number === seat.number)) this.selectedSeats?.push(seat);
+        if (this.selectedSeats?.length! < environment.maxTicketCount) {
+          if (!this.selectedSeats?.find(s => s.row === seat.row && s.number === seat.number)) this.selectedSeats?.push(seat);
+        } else {
+          ticketCountReachedMaxValue = true;
+          this.showNotification();
+        }
       } else {
         const index: any = this.selectedSeats?.findIndex(s => s.row === seat.row && s.number === seat.number);
         this.selectedSeats?.splice(index, 1);
       }
-      this.viewingArea = this.getViewingArea(seat);
+      if (!ticketCountReachedMaxValue) {
+        this.viewingArea = this.getViewingArea(seat);
+      }
     }
   }
 
