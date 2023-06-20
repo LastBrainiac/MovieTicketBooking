@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   }
 
   getMovies() {
-    this.cinemaSvc.getMovieList().subscribe();
+    this.cinemaSvc.getMovieList().subscribe({
+      error: err => window.alert(err.message)
+    });
   }
 }

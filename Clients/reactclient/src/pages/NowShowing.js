@@ -13,7 +13,7 @@ const NowShowing = () => {
 
     useEffect(() => {
         if (screeningData.length > 0) {
-            setDayIsSelected(screeningData[0]);
+            setDayIsSelected(screeningData[0], 0);
         }        
     }, []);
 

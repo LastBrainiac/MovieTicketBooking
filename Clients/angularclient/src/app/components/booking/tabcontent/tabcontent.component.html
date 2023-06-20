@@ -2,10 +2,10 @@
     <p class="selected-date">{{selectedDate}}</p>
     <div class="movies">
         <ng-container *ngFor="let movie of movieList">
-            <div class="movie-card">
+            <div *ngIf="movie.startTimes[ind!].length > 0" class="movie-card">
                 <img [src]="movie.thumbnailPic | base64: 'image/jpg'" alt={{movie.title}}>
                 <div class="movie-details">
-                    <app-movie-details [movie]="movie" [item]="item" />
+                    <app-movie-details [movie]="movie" [item]="item" [startTimes]="movie.startTimes[ind!]" />
                 </div>
             </div>
         </ng-container>        
