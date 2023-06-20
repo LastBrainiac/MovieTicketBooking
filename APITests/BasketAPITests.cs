@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MTBS.BasketAPI.Controllers;
 using MTBS.BasketAPI.Models;
+using MTBS.BasketAPI.Models.DTOs;
 using MTBS.BasketAPI.Repository;
 using MTBS.EventBus;
 using System.Net;
@@ -70,6 +71,28 @@ namespace APITests
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, (response.Result as OkObjectResult).StatusCode);
             Assert.True((bool)((ObjectResult)response.Result).Value);
+        }
+
+        [Fact]
+        public async Task GivenARequest_WhenCallingCheckoutBasket_ThenAPIReturnsExpectedResponse()
+        {
+            var fakeId = "basket999";
+            var fakeBasket = GetFakeBasket(fakeId);
+            var checkoutBasketDto = new CheckoutBasketDTO
+            {
+                BasketId = fakeId,
+                EmailAddress = "aaa@bbb.com",
+                FullName = "John Jack",
+                PhoneNumber = "+369999999"
+            };
+
+            _basketRepositoryMock.Setup(p => p.GetBasketAsync(It.IsAny<string>()))
+                .ReturnsAsync(await Task.FromResult(fakeBasket));
+
+            var basketController = new BasketController(_basketRepositoryMock.Object, _eventBusMock.Object, _configurationMock.Object);
+            var response = await basketController.CheckoutBasket(checkoutBasketDto);
+
+            Assert.Equal((int)HttpStatusCode.Accepted, (response as AcceptedResult).StatusCode);
         }
 
         private CustomerBasket GetFakeBasket(string fakeId)

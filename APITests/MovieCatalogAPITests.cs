@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MTBS.MovieCatalogAPI.Controllers;
 using MTBS.MovieCatalogAPI.Models;
-using MTBS.MovieCatalogAPI.Models.Dtos;
 using MTBS.MovieCatalogAPI.Services;
 using System.Net;
 
@@ -45,7 +44,11 @@ namespace APITests
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
                     ThumbnailPic = Array.Empty<byte>(),
-                    StartTimes = new List<string>() {"20:00", "22:00"},
+                    StartTimes = new List<List<string>>()
+                    {
+                        new List<string>{"20:00", "22:00"},
+                        new List<string>{"20:00", "22:00"}
+                    },
                     Title = "Title"
                 },
                 new Movie
@@ -55,7 +58,11 @@ namespace APITests
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
                     ThumbnailPic = Array.Empty<byte>(),
-                    StartTimes = new List<string>() {"20:00", "22:00"},
+                    StartTimes = new List<List<string>>()
+                    {
+                        new List<string>{"20:00", "22:00"},
+                        new List<string>{"20:00", "22:00"}
+                    },
                     Title = "Title"
                 },
                 new Movie
@@ -65,7 +72,11 @@ namespace APITests
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
                     ThumbnailPic = Array.Empty<byte>(),
-                    StartTimes = new List<string>() {"20:00", "22:00"},
+                    StartTimes = new List<List<string>>()
+                    {
+                        new List<string>{"20:00", "22:00"},
+                        new List<string>{"20:00", "22:00"}
+                    },
                     Title = "Title"
                 }
             };
