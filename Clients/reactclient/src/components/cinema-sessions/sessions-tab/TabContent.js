@@ -3,18 +3,19 @@ import { useContext, useEffect } from "react";
 import { MovieContext } from "../../../MovieContext";
 
 const TabContent = () => {
-    const { selectedMovie, storeScreeningTime } = useContext(MovieContext);
-    const screeningTimeButtons = selectedMovie?.startTimes?.map(time => {
+    const { selectedMovie, storeScreeningTime, startTimeIndex } = useContext(MovieContext);
+
+    const screeningTimeButtons = selectedMovie?.startTimes[startTimeIndex]?.map((times, index) => {
         return (
-            <Link className="start-times" to='/selectseat' onClick={() => storeScreeningTime(time)} key={time}>
-                <p>{time}</p>
+            <Link className="start-times" to='/selectseat' onClick={() => storeScreeningTime(times)} key={index}>
+                <p>{times}</p>
             </Link>
         )
     });
 
     return (
         <div className="tab-content">
-            {screeningTimeButtons}
+            {screeningTimeButtons?.length > 0 ? screeningTimeButtons : <p className="not-showing">This movie is not showing today</p> }
         </div>
     )
 }

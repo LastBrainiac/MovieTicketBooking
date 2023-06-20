@@ -1,9 +1,9 @@
 export interface Movie {
-    id:string;
-    title:string;
+    id: string;
+    title: string;
     genre: string;
     movieLength: string;
-    releaseYear:string;
+    releaseYear: string;
     thumbnailPic: string;
-    startTimes: string[];
+    startTimes: Array<Array<string>>;
 }

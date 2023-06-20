@@ -8,6 +8,6 @@
         public string MovieLength { get; set; }
         public string ReleaseYear { get; set; }
         public byte[] ThumbnailPic { get; set; }
-        public List<string> StartTimes { get; set; }
+        public List<List<string>> StartTimes { get; set; }
     }
 }

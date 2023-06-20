@@ -11,6 +11,7 @@ import { Helper } from 'src/app/core/helper';
 })
 export class TabcontentComponent implements OnInit {
   @Input() item?: ScreeningData;
+  @Input() ind?: number;
   movieList: Movie[] | null = [];
   selectedDate: any;
 
@@ -19,9 +20,9 @@ export class TabcontentComponent implements OnInit {
   ngOnInit(): void {
     this.cinemaSvc.movieSource$.subscribe(
       movies => this.movieList = movies
-    )
+    );
 
-    this.selectedDate = Helper.getLongDate().format(new Date(this.item?.shortDate!))
+    this.selectedDate = Helper.getLongDate().format(new Date(this.item?.shortDate!));
   }
 
 }

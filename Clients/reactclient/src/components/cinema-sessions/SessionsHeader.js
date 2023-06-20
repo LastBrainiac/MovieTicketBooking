@@ -7,7 +7,7 @@ const SessionHeader = () => {
     var item = screeningData.find(item => item.isSelected);
 
     useEffect(() => {
-        setDayIsSelected(item === undefined ? screeningData[0] : item);        
+        setDayIsSelected((item === undefined ? screeningData[0] : item), 0);        
     }, []);
 
     return (

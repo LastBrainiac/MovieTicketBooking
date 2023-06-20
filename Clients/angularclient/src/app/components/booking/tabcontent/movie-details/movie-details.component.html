@@ -4,7 +4,7 @@
     <p>{{movie?.genre}}</p>
     <p>{{movie?.movieLength}}</p>
     <div class="screening-times">
-        <ng-container *ngFor="let startTime of movie?.startTimes">
+        <ng-container *ngFor="let startTime of startTimes">
             <button class="btn-start-time" [routerLink]="['selectseat']"
                 [queryParams]="{movieId: movie?.id, screeningDate: [item?.shortDate, startTime]}">{{startTime}}</button>
         </ng-container>

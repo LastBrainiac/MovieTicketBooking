@@ -845,6 +845,15 @@ th {
   padding: .2em .4em;
 }
 
+.not-showing {
+  margin: 0;
+  color: var(--selected);
+  font-size: 1.2em;
+  border: 1px solid var(--gray);
+  border-radius: 15px;
+  padding: .5em 0;
+}
+
 @media (min-width: 780px) {
   .header-container {
     padding: .6em 0;

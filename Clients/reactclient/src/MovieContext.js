@@ -21,6 +21,7 @@ const MovieContextProvider = (props) => {
     const [saveBasketTrigger, setSaveBasketTrigger] = useState(false);
     const [checkoutObj, setCheckoutObj] = useState({});
     const [checkoutBasketTrigger, setCheckoutBasketTrigger] = useState(false);
+    const [startTimeIndex, setStartTimeIndex] = useState(0);
 
     useEffect(() => {
         setLoading(true);
@@ -137,9 +138,10 @@ const MovieContextProvider = (props) => {
         setScreeningData(Common.getScreeningData());
     }
 
-    const setDayIsSelected = (data) => {
+    const setDayIsSelected = (data, index) => {
         setScreeningData(prev => prev.map(item => item.day === data?.day ? { ...item, isSelected: true } : { ...item, isSelected: false }));
         setScreeningShortDate(data?.shortDate);
+        setStartTimeIndex(index);
     }
 
     const storeScreeningTime = (time) => {
@@ -197,6 +199,7 @@ const MovieContextProvider = (props) => {
             apiResponse,
             hideFooter,
             selectedSeats,
+            startTimeIndex,
             storeSelectedMovie,
             setDayIsSelected,
             storeScreeningTime,

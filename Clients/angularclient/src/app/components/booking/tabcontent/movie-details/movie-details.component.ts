@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
 import { ScreeningData } from 'src/app/models/screeningData';
 
@@ -7,12 +7,8 @@ import { ScreeningData } from 'src/app/models/screeningData';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent {
   @Input() movie?: Movie;
   @Input() item?: ScreeningData;
-
-  ngOnInit(): void {
-    
-  }
-
+  @Input() startTimes?: Array<string>;
 }
