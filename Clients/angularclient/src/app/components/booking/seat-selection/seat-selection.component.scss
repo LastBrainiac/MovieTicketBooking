@@ -1,37 +1,65 @@
 .seat-selection-container {
     margin: 0 auto;
     padding-top: 6em;
-    width: 60%;
+    width: 95%;
 }
 
 .seat-selection-header {
     width: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     background-color: rgb(249, 249, 249);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgb(138, 137, 137);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgb(138, 138, 137);
+    overflow: hidden;
+
+    img {
+        height: 120px;
+        object-fit: cover;
+        object-position: top;
+    }
 
     p {
         margin: 0;
-        padding: .2em 1.5em;
-        font-size: 1.1em;
-        font-weight: 500;
+        font-size: 3.3vw;
+        font-weight: 400;
         color: rgb(105, 105, 105);
     }
 
+    .pad-right {
+        padding-right: .2em;
+    }
+
+    .pad-left-right {
+        padding: 0 .2em;
+    }
+
     .start-time {
-        color: rgb(255, 125, 4);
+        color: rgb(255, 123, 90);
         font-weight: 700;
+    }
+
+    .movie-details {
+        padding-left: .5em;
+        padding-top: .2em;
+        padding-bottom: .3em;
+    }
+
+    .movie-title {
+        font-size: 4.4vw;
+        font-weight: 500;
+    }
+
+    .movie-other {
+        display: flex;
     }
 }
 
 .seat-selection-body {
     width: 100%;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding-bottom: 1em;
+    border-radius: 5px;
     margin-top: .5em;
     box-shadow: 0 1px 3px rgb(138, 137, 137);
     background-color: rgb(249, 249, 249);
@@ -39,9 +67,9 @@
 
 .title-container {
     display: flex;
-    justify-content: space-between;        
+    justify-content: space-between;
     align-items: center;
-    padding: .5em .5em .4em 1em;
+    padding: .2em .2em .2em .4em;
 
     mat-icon {
         cursor: pointer;
@@ -52,7 +80,7 @@
     text-align: center;
     color: rgb(105, 105, 105);
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 500;
 }
 
@@ -60,29 +88,28 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    padding-top: 1em;
+    padding-top: .7em;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 130px;
-    padding-right: 1em;
+    width: 80px;
 }
 
 .legend-title {
-    font-size: 1em;
+    font-size: .8em;
     margin: 0;
-    padding-left: .6em;
+    padding-left: .3em;
     color: gray;
 }
 
 .legend-square {
-    width: 25px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
     box-shadow: 0 0 4px black inset;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .legend-available {
@@ -98,46 +125,48 @@
 }
 
 .viewing-area {
-    padding: 1.5em 0;    
+    padding: .7em 0;
 }
 
 .rows {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: .5em;
-    margin-bottom: .5em;
-    p{
-        width: 30px;
+    gap: .25em;
+    margin-bottom: .2em;
+    padding-right: .5em;
+
+    p {
+        width: 20px;
         margin: 0;
         text-align: right;
     }
 
     .row-number {
-        font-weight: 500;
+        font-weight: 400;
         color: rgb(105, 105, 105);
-        font-size: 1.25em;
-        margin-right: .75em;
+        font-size: .9em;
+        margin-right: .2em;
     }
 }
 
-.seats {    
-    background-color: bisque;
+.seats {
     color: whitesmoke;
 }
 
-.seat {    
+.seat {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 35px;
-    border-radius: 5px;
-    box-shadow: 0 0 4px rgb(141, 141, 141);  
-    transition: all 0.15s linear;  
+    width: 6vw;
+    height: 5.5vw;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgb(141, 141, 141);
+    transition: all 0.2s linear;
+    font-size: .8em;
 
     &:not(.seat-color-booked, .seat-color-selected):hover {
-        transform: scale(1.15);
+        transform: scale(1.1);
         background-color: rgb(175, 255, 202);
         color: darkgreen;
     }
@@ -168,13 +197,13 @@
 }
 
 .btn-next {
-    margin-top: 1em;
-    margin-right: 1em;
-    padding: .5em 2em;
+    margin: .8em 0;
+    margin-right: .8em;
+    padding: .2em 1.2em;
     border: none;
     background-color: var(--border-color);
-    box-shadow: 0 0 3px gray;
-    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    border-radius: 3px;
 
     &:not([disabled]):hover {
         background-color: rgb(105, 105, 105);
@@ -183,5 +212,235 @@
 
     &:disabled {
         cursor: not-allowed;
+    }
+}
+
+@media (min-width: 600px) {
+
+    .seat-selection-container {
+        width: 90%;
+    }
+
+    .seat-selection-header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        border-radius: 8px;
+
+        img {
+            height: 130px;
+        }
+
+        p {
+            font-size: 2.1vw;
+            font-weight: 400;
+        }
+
+        .pad-right {
+            padding-right: .3em;
+        }
+
+        .pad-left-right {
+            padding: 0 .3em;
+        }
+
+        .start-time {
+            font-weight: 700;
+        }
+
+        .movie-details {
+            padding-left: 1em;
+            padding-bottom: .8em;
+        }
+
+        .movie-title {
+            font-size: 3vw;
+            font-weight: 600;
+        }
+    }
+
+    .seat-selection-body {
+        border-radius: 8px;
+    }
+
+    .title-container {
+        padding: .5em .5em .4em 1em;
+    }
+
+    .select-title {
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+    .legend {
+        padding-top: 1em;
+    }
+
+    .legend-item {
+        width: 120px;
+    }
+
+    .legend-title {
+        font-size: .9em;
+        padding-left: .4em;
+    }
+
+    .legend-square {
+        width: 22px;
+        height: 22px;
+        border-radius: 5px;
+    }
+
+    .viewing-area {
+        padding: 1em 0;
+    }
+
+    .rows {
+        gap: .4em;
+        margin-bottom: .4em;
+        padding-right: .825em;
+
+        p {
+            width: 20px;
+        }
+
+        .row-number {
+            font-weight: 500;
+            font-size: 1em;
+            margin-right: 0;
+        }
+    }
+
+    .seat {
+        width: 5.7vw;
+        height: 4vw;
+        font-size: 1em;
+        border-radius: 5px;
+        box-shadow: 0 0 4px rgb(141, 141, 141);
+    }
+
+    .btn-next {
+        margin-top: 1em;
+        margin-right: 1em;
+        padding: .2em 1.5em;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 950px) {
+
+    .seat-selection-container {
+        width: 80%;
+    }
+
+    .seat-selection-header {
+
+        img {
+            height: 140px;
+        }
+
+        p {
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+
+        .pad-right {
+            padding-right: .5em;
+        }
+
+        .pad-left-right {
+            padding: 0 .5em;
+        }
+
+        .start-time {
+            font-weight: 700;
+        }
+
+        .movie-details {
+            padding-left: 1em;
+            padding-bottom: 1em;
+        }
+
+        .movie-title {
+            font-size: 1.7em;
+            letter-spacing: .05em;
+            font-weight: 500;
+        }
+    }
+
+    .legend-item {
+        width: 130px;
+    }
+
+    .legend-title {
+        font-size: 1em;
+        padding-left: .6em;
+    }
+
+    .legend-square {
+        width: 25px;
+        height: 25px;
+    }
+
+    .rows {
+        gap: .5em;
+        margin-bottom: .5em;
+
+        p {
+            width: 30px;
+        }
+
+        .row-number {
+            font-size: 1.1em;
+            margin-right: .5em;
+        }
+    }
+
+    .seat {
+        width: 5.2vw;
+        height: 35px;
+    }
+
+    .btn-next {
+        margin-top: .8em;
+        margin-right: .8em;
+        padding: .5em 2em;
+    }
+}
+
+@media (min-width: 1450px) {
+
+    .seat-selection-container {
+        width: 70%;
+    }
+
+    .seat-selection-header {
+
+        img {
+            height: 150px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        .movie-details {
+            padding-left: 1.5em;
+            padding-bottom: 1.5em;
+        }
+
+        .movie-title {
+            font-size: 1.8em;
+        }
+    }
+
+    .seat {
+        width: 4.7vw;
+        height: 40px;
+    }
+
+    .btn-next {
+        margin-top: 1em;
+        margin-right: 1em;
     }
 }
