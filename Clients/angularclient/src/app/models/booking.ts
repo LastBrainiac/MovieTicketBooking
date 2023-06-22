@@ -1,20 +1,20 @@
-export interface BookingHeader {
+export interface BookingHeaderDto {
     fullName: string;
     emailAddress:string;
     phoneNumber: string;
-    bookingDetails: BookingDetails[];
+    bookingDetails: BookingDetailsDto[];
 }
 
-export interface BookingDetails {
+export interface BookingDetailsDto {
     movieId: string;
     movieTitle: string;
     ticketQuantity: number;
     ticketPrice: number;
     screeningDate: string;
-    reservedSeats: ReservedSeat[];
+    reservedSeats: ReservedSeatDto[];
 }
 
-export interface ReservedSeat {
+export interface ReservedSeatDto {
     row: number;
     seat: number;
 }

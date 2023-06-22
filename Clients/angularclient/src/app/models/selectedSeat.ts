@@ -1,4 +1,4 @@
 export interface SelectedSeat {
     row: number;
-    number: number;
+    seat: number;
 }

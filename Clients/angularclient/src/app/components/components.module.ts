@@ -15,6 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button'
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,14 @@ import { MatButtonModule } from '@angular/material/button'
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ToastrModule.forRoot({
+      positionClass: "toast-top-right"
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ComponentsModule { }

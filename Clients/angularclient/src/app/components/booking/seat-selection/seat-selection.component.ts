@@ -32,7 +32,7 @@ export class SeatSelectionComponent implements OnInit {
     this.route.queryParams.subscribe(
       params => {
         this.movieId = params['movieId'];
-        this.screeningDate = params['screeningDate'].join(' ')
+        this.screeningDate = params['screeningDate'].join(' ');
       }
     )
 
@@ -52,7 +52,13 @@ export class SeatSelectionComponent implements OnInit {
   }
 
   onButtonClicked() {
-    const navExtras: NavigationExtras = { state: this.selectedSeats };
+    const navExtras: NavigationExtras = {
+      state: {
+        bookedSeats: this.selectedSeats,
+        selectedMovie: this.selectedMovie,
+        screeningDate: this.screeningDate
+      }
+    };
     this.routing.navigate(['/booking/userinfo'], navExtras);
   }
 
@@ -61,13 +67,13 @@ export class SeatSelectionComponent implements OnInit {
     if (!isBooked) {
       if (!isSelected) {
         if (this.selectedSeats?.length! < environment.maxTicketCount) {
-          if (!this.selectedSeats?.find(s => s.row === seat.row && s.number === seat.number)) this.selectedSeats?.push(seat);
+          if (!this.selectedSeats?.find(s => s.row === seat.row && s.seat === seat.seat)) this.selectedSeats?.push(seat);
         } else {
           ticketCountReachedMaxValue = true;
           this.showNotification();
         }
       } else {
-        const index: any = this.selectedSeats?.findIndex(s => s.row === seat.row && s.number === seat.number);
+        const index: any = this.selectedSeats?.findIndex(s => s.row === seat.row && s.seat === seat.seat);
         this.selectedSeats?.splice(index, 1);
       }
       if (!ticketCountReachedMaxValue) {
@@ -83,7 +89,7 @@ export class SeatSelectionComponent implements OnInit {
           return {
             ...row,
             seats: row.seats.map(s => {
-              if (s.seatNumber === seat.number) {
+              if (s.seatNumber === seat.seat) {
                 return {
                   ...s,
                   isSelected: !s.isSelected

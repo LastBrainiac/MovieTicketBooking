@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BookingHeader } from 'src/app/models/booking';
+import { BookingHeaderDto } from 'src/app/models/booking';
 import { ViewingArea } from 'src/app/models/viewingArea';
 import { environment } from 'src/environments/environment';
 
@@ -16,7 +16,7 @@ export class BookingService {
     return this.http.get<ViewingArea>(`${this.baseUrl}booking?movieid=${movieId}&screeningdate=${screeningDate}`);
   }
 
-  saveBookingData(booking: BookingHeader) {
-    this.http.post(`${this.baseUrl}booking`, booking);
+  saveBookingData(booking: BookingHeaderDto) {
+    return this.http.post(`${this.baseUrl}booking`, booking);
   }
 }

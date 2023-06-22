@@ -36,7 +36,7 @@
                 <div class="seats" *ngFor="let seat of row.seats">
                     <div class="seat"
                         [ngClass]="{'seat-color-available': !seat.booked, 'seat-color-booked':seat.booked, 'seat-color-selected': seat.isSelected}"
-                        (click)="onSeatClicked({row: row.rowNumber, number: seat.seatNumber}, seat.booked, seat.isSelected)">
+                        (click)="onSeatClicked({row: row.rowNumber, seat: seat.seatNumber}, seat.booked, seat.isSelected)">
                         {{seat.seatNumber}}
                     </div>
                 </div>

@@ -1,1 +1,29 @@
-<p>user-info works!</p>
+<div class="userinfo-container">
+    <div class="user-details">
+        <form [formGroup]="userInfoForm" (ngSubmit)="onSubmit()">
+            <p class="form-title">Your Details</p>
+            <div class="input-fields">
+                <mat-form-field>
+                    <mat-label>Full Name</mat-label>
+                    <input matInput formControlName="fullName">
+                    <mat-error *ngIf="userInfoForm.get('fullName')?.invalid">This field is mandatory!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="emailAddress">
+                    <mat-error *ngIf="userInfoForm.get('emailAddress')?.invalid">Missing or invalid email
+                        address!</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                </mat-form-field>
+            </div>
+            <div class="btn-container">
+                <button [disabled]="userInfoForm.invalid" class="btn-confirm text-uppercase" type="submit">Confirm</button>
+            </div>
+        </form>
+        <mat-icon class="close-icon" fontIcon="close" [routerLink]="['/booking']"
+            matTooltip="Back to movie selection"></mat-icon>
+    </div>
+</div>
