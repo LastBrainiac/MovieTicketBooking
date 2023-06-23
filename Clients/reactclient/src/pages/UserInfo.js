@@ -70,7 +70,7 @@ const UserInfo = () => {
             <form onSubmit={submitHandler}>
                 <div className='info-form'>
                     <ThemeProvider theme={Common.darkTheme}>
-                        <TextField required sx={{ marginRight: '1em', width: '100%' }} label="Full Name" variant="outlined" onChange={changeHandler} name='fullName' value={formData.fullName} />
+                        <TextField required sx={{ marginRight: '1em', width: '100%' }} label="Full Name" variant="outlined" onChange={changeHandler} name='fullName' value={formData.fullName} autoFocus />
                         <TextField required type='email' sx={{ marginRight: '1em', width: '100%' }} label="Email Address" variant="outlined" onChange={changeHandler} name='emailAddress' value={formData.emailAddress} />
                         <TextField sx={{ width: '100%' }} label="Phone Number" variant="outlined" onChange={changeHandler} name='phoneNumber' value={formData.phoneNumber} />
                     </ThemeProvider>

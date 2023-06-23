@@ -2,6 +2,7 @@
     <div class="seat-selection-header">
         <img [src]="selectedMovie?.thumbnailPic | base64: 'image/jpg'" alt={{selectedMovie?.title}}>
         <div class="movie-details">
+            <p class="start-time">{{screeningDate}}</p>
             <p class="movie-title text-uppercase">{{selectedMovie?.title}}</p>
             <div class="movie-other">
                 <p class="pad-right">{{selectedMovie?.releaseYear}}</p>
@@ -9,8 +10,6 @@
                 <p class="pad-left-right">{{selectedMovie?.genre}}</p>
                 <mat-divider [vertical]="true"></mat-divider>
                 <p class="pad-left-right">{{selectedMovie?.movieLength}}</p>
-                <mat-divider [vertical]="true"></mat-divider>
-                <p class="start-time pad-left-right">{{screeningDate}}</p>
             </div>
         </div>
     </div>

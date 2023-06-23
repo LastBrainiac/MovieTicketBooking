@@ -1,11 +1,14 @@
 <div class="userinfo-container">
     <div class="user-details">
+        <div>
+            <!-- <p></p> -->
+        </div>
         <form [formGroup]="userInfoForm" (ngSubmit)="onSubmit()">
             <p class="form-title">Your Details</p>
             <div class="input-fields">
                 <mat-form-field>
                     <mat-label>Full Name</mat-label>
-                    <input matInput formControlName="fullName">
+                    <input matInput formControlName="fullName" #fullName>
                     <mat-error *ngIf="userInfoForm.get('fullName')?.invalid">This field is mandatory!</mat-error>
                 </mat-form-field>
                 <mat-form-field>

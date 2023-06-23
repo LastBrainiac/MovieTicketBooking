@@ -29,12 +29,12 @@ img {
 
 .movie-details {
     position: absolute;
-    left: 1.5em;
-    bottom: 2.5em;
-    border-radius: 25px 4px;
+    left: 1em;
+    top: 1em;
+    border-radius: 10px;    
     padding: 1em;
     background-color: rgba(0, 0, 0, .2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .45) inset;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .65) inset;
 
     h1,
     p {
@@ -42,7 +42,6 @@ img {
         text-shadow: 0 0 10px black;
         font-weight: 500;
         margin: 0;
-        opacity: .75;
     }
 
     h1 {
@@ -88,13 +87,7 @@ img {
     }
 
     .movie-details {
-        left: 3em;
-        bottom: 3em;
-        border-radius: 40px 8px;
-        padding: 2em;
-        background-color: rgba(0, 0, 0, .3);
-        box-shadow: 0 0 15px rgba(0, 0, 0, .45) inset;
-
+        
         h1 {
             font-size: 2.5em;
         }

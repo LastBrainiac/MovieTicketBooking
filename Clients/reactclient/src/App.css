@@ -489,7 +489,7 @@ footer {
 .legend {
   display: flex;
   justify-content: center;
-  margin-top: .8em;
+  margin-top: 1em;
 }
 
 .legend-item {
@@ -532,12 +532,12 @@ footer {
 }
 
 .viewing-area {
-  margin-top: .5em;
+  margin-top: 1em;
   width: 100%;
 }
 
 .row {
-  margin-bottom: .07em;
+  margin-bottom: .2em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -545,7 +545,7 @@ footer {
 
 .row-number {
   margin-right: .6em;
-  width: 12px;
+  width: 18px;
   text-align: right;
   color: var(--gray-light);
 }
@@ -555,8 +555,8 @@ footer {
 }
 
 .seat-square {
-  width: 20px;
-  height: 18px;
+  width: 4.7vw;
+  height: 4.3vw;
   margin-right: .3em;
   border-radius: 5px 5px 0 0;
   display: flex;
@@ -958,14 +958,14 @@ th {
   }
 
   .seat-square {
-    width: 45px;
-    height: 25px;
+    width: 5vw;
+    height: 2.3vw;
     margin-right: .5em;
     border-radius: 10px 10px 0 0;
   }
 
   .row {
-    padding-bottom: .7em;
+    padding-bottom: .5em;
   }
 
   .row-number {
@@ -1078,8 +1078,8 @@ th {
   }
 
   .seat-square {
-    width: 60px;
-    height: 30px;
+    width: 70px;
+    height: 33px;
     margin-right: .7em;
     border-radius: 15px 15px 0 0;
   }

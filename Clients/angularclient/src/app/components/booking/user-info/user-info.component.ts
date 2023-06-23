@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements AfterViewInit {
+  @ViewChild('fullName') fullNameField?: ElementRef<HTMLInputElement>;
+
   bookingData: any;
 
   constructor(private router: Router,
@@ -21,10 +23,16 @@ export class UserInfoComponent {
     this.bookingData = this.router.getCurrentNavigation()?.extras.state;
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.fullNameField?.nativeElement.focus();
+    });
+  }
+
   userInfoForm = this.fb.group({
-    fullName: ['', Validators.required],
-    emailAddress: ['', [Validators.required, Validators.email]],
-    phoneNumber: ''
+    fullName: [null, Validators.required],
+    emailAddress: [null, [Validators.required, Validators.email]],
+    phoneNumber: null
   });
 
   onSubmit() {
