@@ -1,8 +1,29 @@
 <div class="userinfo-container">
     <div class="user-details">
         <div>
-            <!-- <p></p> -->
+            <p class="form-title">Booking Details</p>
+            <table class="table-items">
+                <thead>
+                    <tr>
+                        <th class='t-left'>Movie Title</th>
+                        <th class='t-right'>Screening Date</th>
+                        <th class='t-right'>Ticket Quantity</th>
+                        <th class='t-right'>Ticket Price</th>
+                        <th class='t-right'>Total</th>
+                    </tr>
+                </thead>
+                <tbody class='t-body'>
+                    <tr>
+                        <td>{{bookingData.selectedMovie.title}}</td>
+                        <td class='t-right'>{{selectedDate}}</td>
+                        <td class='t-right'>{{bookingData.bookedSeats.length}}</td>
+                        <td class='t-right'>{{ticketPrice}}</td>
+                        <td class='t-right'>{{bookingData.bookedSeats.length * ticketPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <mat-divider />
         <form [formGroup]="userInfoForm" (ngSubmit)="onSubmit()">
             <p class="form-title">Your Details</p>
             <div class="input-fields">
@@ -23,7 +44,8 @@
                 </mat-form-field>
             </div>
             <div class="btn-container">
-                <button [disabled]="userInfoForm.invalid" class="btn-confirm text-uppercase" type="submit">Confirm</button>
+                <button [disabled]="userInfoForm.invalid" class="btn-confirm text-uppercase"
+                    type="submit">Confirm</button>
             </div>
         </form>
         <mat-icon class="close-icon" fontIcon="close" [routerLink]="['/booking']"

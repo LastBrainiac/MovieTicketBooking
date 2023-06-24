@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BookingHeaderDto } from 'src/app/models/booking';
 import { BookingService } from '../booking.service';
 import { environment } from 'src/environments/environment';
+import { Helper } from 'src/app/core/helper';
 
 @Component({
   selector: 'app-user-info',
@@ -15,12 +16,16 @@ export class UserInfoComponent implements AfterViewInit {
   @ViewChild('fullName') fullNameField?: ElementRef<HTMLInputElement>;
 
   bookingData: any;
+  selectedDate: any;
+  ticketPrice: any;
 
   constructor(private router: Router,
     private toastr: ToastrService,
     private fb: FormBuilder,
     private bookingSvc: BookingService) {
     this.bookingData = this.router.getCurrentNavigation()?.extras.state;
+    this.selectedDate = Helper.getLongDateShortTime().format(new Date(this.bookingData.screeningDate));
+    this.ticketPrice = environment.ticketPrice;
   }
 
   ngAfterViewInit(): void {
@@ -58,7 +63,7 @@ export class UserInfoComponent implements AfterViewInit {
           movieId: this.bookingData.selectedMovie.id,
           movieTitle: this.bookingData.selectedMovie.title,
           ticketQuantity: this.bookingData.bookedSeats.length,
-          ticketPrice: environment.ticketPrice,
+          ticketPrice: this.ticketPrice,
           screeningDate: new Date(this.bookingData.screeningDate).toISOString(),
           reservedSeats: this.bookingData.bookedSeats
         }

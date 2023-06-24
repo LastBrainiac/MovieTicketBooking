@@ -24,7 +24,15 @@ export class Helper {
     static getLongDate(): Intl.DateTimeFormat {
         return new Intl.DateTimeFormat('en', {
             timeStyle: undefined,
+            dateStyle: "long"
+        });
+    }
+
+    static getLongDateShortTime(): Intl.DateTimeFormat {
+        return new Intl.DateTimeFormat('en', {
+            timeStyle: "short",
             dateStyle: "long",
+            hour12: false
         });
     }
 }

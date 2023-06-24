@@ -58,10 +58,54 @@
     margin: 0;
     padding-left: .2em;
     padding-bottom: .5em;
+    padding-top: .5em;
     font-size: 1.2em;
     letter-spacing: .03em;
     font-weight: 500;
+    color: rgb(45, 42, 202);
 }
+
+.table-items {
+    width: 100%;
+    margin-left: .3em;
+    margin-bottom: 2em;
+    color: rgb(126, 126, 126);
+    font-size: 2.1vw;
+    border-collapse: collapse;
+
+    th {
+        padding: 0 .5em;
+        font-weight: 500;
+    }
+}
+
+mat-form-field {
+    input {
+        font-size: .8em;
+    }
+}
+
+.t-left {
+    text-align: left;
+}
+
+.t-right {
+    text-align: right;
+}
+
+.t-body {
+
+    tr {
+        border-bottom: 1px solid hsl(0, 0%, 55%);
+        background-color: rgb(245, 245, 245);
+    }
+
+    td {
+        padding: .2em .5em;
+    }
+}
+
+
 
 @media(min-width: 800px) {
 
@@ -72,20 +116,30 @@
     .user-details {
         border-radius: 8px;
     }
-    
+
     .input-fields {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1em;
     }
-    
+
     .btn-confirm {
         padding: .5em 1em;
         font-size: 1em;
     }
-    
+
     .form-title {
         font-size: 1.7em;
+    }
+
+    .table-items {
+        font-size: 1.15em;
+    }
+
+    mat-form-field {
+        input {
+            font-size: 1em;
+        }
     }
 }
 
