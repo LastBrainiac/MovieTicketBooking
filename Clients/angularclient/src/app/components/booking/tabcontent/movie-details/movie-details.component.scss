@@ -1,7 +1,7 @@
 .movie-title {
     font-size: 1em !important;
     font-weight: 500;
-    color: rgb(236, 134, 0) !important;
+    color: rgb(255, 123, 90) !important;
 }
 
 .screening-times {
@@ -27,10 +27,10 @@
     border-radius: 5px;
     border: none;
     color: antiquewhite;
-    background-color: hsl(177, 100%, 20%);
+    background-color: hsl(177, 100%, 24%);
 
     &:hover {
-        background-color: rgb(236, 134, 0);
+        background-color: rgb(255, 123, 90);
     }
 }
 

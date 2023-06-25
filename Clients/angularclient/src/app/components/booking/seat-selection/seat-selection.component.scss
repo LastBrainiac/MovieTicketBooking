@@ -8,10 +8,10 @@
     width: auto;
     display: flex;
     flex-direction: column;
-    background-color: rgb(249, 249, 249);
-    border: 1px solid var(--border-color);
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgb(138, 138, 137);
+    box-shadow: 0 0 3px hsl(60, 0%, 67%);
     overflow: hidden;
 
     img {
@@ -59,11 +59,11 @@
 
 .seat-selection-body {
     width: 100%;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--card-border);
     border-radius: 5px;
     margin-top: .5em;
-    box-shadow: 0 1px 3px rgb(138, 137, 137);
-    background-color: rgb(249, 249, 249);
+    box-shadow: 0 0 3px hsl(0, 0%, 67%);
+    background-color: var(--card-background);
 }
 
 .title-container {
@@ -209,6 +209,10 @@
     &:not([disabled]):hover {
         background-color: rgb(105, 105, 105);
         color: whitesmoke;
+    }
+
+    &:enabled {
+        background-color: rgb(206, 206, 206);
     }
 
     &:disabled {

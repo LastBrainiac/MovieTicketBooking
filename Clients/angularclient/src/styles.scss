@@ -1,10 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-
 :root {
     --available: rgb(4, 190, 88);
     --booked: rgb(2, 92, 0);
     --selected: rgb(255, 217, 0);
     --border-color: rgb(235, 235, 235);
+    --card-background: hsl(0, 0%, 95%);
+    --card-border: hsl(0, 0%, 89%);
 }
 
 html,
@@ -15,8 +15,8 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: rgb(66, 66, 66);
     box-sizing: border-box;
+    background-color: hsl(0, 0%, 98%) !important;
 }
 
 .ngx-toastr {
