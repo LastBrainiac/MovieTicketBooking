@@ -13,6 +13,9 @@ services:
   mongodb:
     image: mongo
 
+  mongoexpress:
+    image: mongo-express
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
 

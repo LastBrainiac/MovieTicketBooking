@@ -13,6 +13,7 @@
     border-radius: 5px;
     box-shadow: 0 0 3px hsl(60, 0%, 67%);
     overflow: hidden;
+    position: relative;
 
     img {
         height: 120px;
@@ -55,6 +56,15 @@
     .movie-other {
         display: flex;
     }
+
+    mat-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        color: whitesmoke;
+        text-shadow: 0 0 3px black;
+    }
 }
 
 .seat-selection-body {
@@ -66,23 +76,13 @@
     background-color: var(--card-background);
 }
 
-.title-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .2em .2em .2em .4em;
-
-    mat-icon {
-        cursor: pointer;
-    }
-}
-
 .select-title {
     text-align: center;
     color: rgb(105, 105, 105);
     margin: 0;
     font-size: 1em;
     font-weight: 500;
+    padding: .3em 1em;
 }
 
 .legend {
@@ -263,14 +263,17 @@
             font-size: 3vw;
             font-weight: 600;
         }
+
+        mat-icon {
+            color: gray;
+            top: 10px;
+            right: 10px;
+            text-shadow: none;
+        }
     }
 
     .seat-selection-body {
         border-radius: 8px;
-    }
-
-    .title-container {
-        padding: .5em .5em .4em 1em;
     }
 
     .select-title {
@@ -373,6 +376,10 @@
             letter-spacing: .05em;
             font-weight: 500;
         }
+    }
+
+    .select-title {
+        font-size: 1.3em;
     }
 
     .legend-item {

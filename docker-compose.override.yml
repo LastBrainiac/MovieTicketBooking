@@ -37,6 +37,15 @@ services:
     volumes:
         - mongo_data:/data/db
 
+  mongoexpress:
+    container_name: mongoexpress
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    ports:
+      - 8800:8081
+    depends_on:
+      - mongodb
+
   rabbitmq:
     ports:
         - "5672:5672"

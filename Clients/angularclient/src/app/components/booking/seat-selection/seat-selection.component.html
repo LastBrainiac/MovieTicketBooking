@@ -12,12 +12,10 @@
                 <p class="pad-left-right">{{selectedMovie?.movieLength}}</p>
             </div>
         </div>
+        <mat-icon fontIcon="close" [routerLink]="['/booking']" matTooltip="Back to movie selection"></mat-icon>
     </div>
     <div class="seat-selection-body">
-        <div class="title-container">
-            <p class="select-title text-uppercase">Select your seats!</p>
-            <mat-icon fontIcon="close" [routerLink]="['/booking']" matTooltip="Back to movie selection"></mat-icon>
-        </div>
+        <p class="select-title text-uppercase">Select your seats!</p>
         <mat-divider></mat-divider>
         <div class="legend">
             <div class="legend-item">
