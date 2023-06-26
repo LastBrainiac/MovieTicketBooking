@@ -4,8 +4,6 @@
 
 This application is a simplified movie ticket booking system and made as a hobby project. Very important that is not a production ready software. I'm aware that it lacks lots of logging, validation and error handling, but that's not the point now, because the main goal was to build a microservice based backend which runs in the Docker container. The backend serves two frontends which have almost same functionality, but created with different technologies and user interfaces.
 
----
-
 ## Used technologies
 
 ### Backend
@@ -21,13 +19,9 @@ This application is a simplified movie ticket booking system and made as a hobby
 - Angular 15 with Angular Material and NGX Bootstrap
 - React 18 with Material UI
 
----
-
 ## Application's architecture
 
 ![](readmeimgs/architecture.jpg)
-
----
 
 ## Getting started
 
