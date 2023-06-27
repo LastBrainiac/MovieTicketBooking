@@ -9,7 +9,7 @@ const ScreeningTimes = () => {
         <div className="cinema-sessions">
             <Link to='/'>
                 <Tooltip title='Back to browsing movies' placement="left">
-                    <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
+                    <CloseIcon className="close-icon" />
                 </Tooltip>
             </Link>
             <SessionHeader />

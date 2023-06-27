@@ -18,7 +18,7 @@ const SeatSelection = () => {
         <div className="seat-selection-container">
             <Link to='/screening' onClick={() => showFooter()}>
                 <Tooltip title='Back to screening dates' placement="left">
-                    <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
+                    <CloseIcon className="close-icon" />
                 </Tooltip>
             </Link>
             <SelectionHeader />

@@ -63,7 +63,7 @@ const UserInfo = () => {
         <div className="user-info-container">
             <Link to='/cart'>
                 <Tooltip title='Back to My Bookings' placement="left">
-                    <CloseIcon sx={{ fontSize: '2em' }} className="close-icon" />
+                    <CloseIcon className="close-icon" />
                 </Tooltip>
             </Link>
             <p>Please enter the necessary information for bookings</p>
