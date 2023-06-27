@@ -2,7 +2,7 @@
 
 ## Overview
 
-This application is a simplified movie ticket booking system and made as a hobby project. Very important that is not a production ready software. I'm aware that it lacks lots of logging, validation and error handling, but that's not the point now, because the main goal was to build a microservice based backend which runs in the Docker container. The backend serves two frontends which have almost same functionality, but created with different technologies and user interfaces.
+This application is a simplified movie ticket booking system - which made as a hobby project - and based on a backend with microservices architecture which runs in the Docker containers. The backend serves two frontends which have almost same functionality, but created with different technologies and user interfaces.
 
 ## Used technologies
 
