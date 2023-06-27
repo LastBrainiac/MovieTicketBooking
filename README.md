@@ -54,7 +54,7 @@ Check the other services with these information:
 
 ### Frontend
 
-At first you have to install npm packages for both clients. After the installations have been successfully finished, you can start the frontend applications as usual, let's say in the [VS Code](https://code.visualstudio.com/) or any other code editor.
+At first you have to install npm packages for both clients. After the installations have been successfully finished, you can start the frontend applications as usual (if you need some help with this, check the Readme file in the `angularclient` or `reactclient` folders), let's say in the [VS Code](https://code.visualstudio.com/) or any other code editor.
 If every installation steps were successful both backend and frontend side you can start the clients and will see these starting screens:
 
 >Angular client
