@@ -13,7 +13,7 @@ This application is a simplified movie ticket booking system - which made as a h
 - Redis as a microservice's database
 - Ocelot API gateway to forward incoming HTTP request to the appropriate WebAPI service
 - RabbitMQ message broker for indirect internal communication between microservices
-- Docker for all of the above to work well together in a container
+- Docker for all of the above to work well together in a Linux containers
 
 ### Frontend
 - Angular 15 with Angular Material and NGX Bootstrap
