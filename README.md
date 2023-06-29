@@ -27,7 +27,7 @@ This application is a simplified movie ticket booking system - which made as a h
 
 ### Backend
 
-If you want to try this application then make sure you have installed [NodeJS](https://nodejs.org/en), [.Net6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) according to your computer's operation system.
+If you want to try this application then make sure you have installed [NodeJS](https://nodejs.org/en), [.Net6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) and [Docker Desktop](https://www.docker.com/products/docker-desktop/) ([WSL installation for Windows users](https://learn.microsoft.com/en-us/windows/wsl/install)) according to your computer's operation system.
 
 If everything is fine, you can run the below commands from your root source directory (where the docker-compose files can be located).
 
