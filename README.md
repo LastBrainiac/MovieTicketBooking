@@ -36,7 +36,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-After the commands have been successfully run you can try the backend API's through their Swagger page by using the below links (NotificationAPI has no operations defined):
+After successfully running the commands you can try the backend API's through their Swagger page by using the below links (NotificationAPI has no operations defined):
 
 - [BookingAPI](http://host.docker.internal:5402/swagger)
 - [BasketAPI](http://host.docker.internal:5401/swagger)
