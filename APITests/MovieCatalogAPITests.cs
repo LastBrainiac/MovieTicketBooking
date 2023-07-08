@@ -35,49 +35,53 @@ namespace APITests
 
         private List<Movie> GetFakeMovieList()
         {
+            Random rnd = new Random();
+            byte[] byteArray = new byte[100];
+            rnd.NextBytes(byteArray);
+
             return new List<Movie>
             {
                 new Movie
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = "64954028b90bb3aacd5fd85b",
                     Genre = "Action, Crime, Thriller",
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
-                    ThumbnailPic = Array.Empty<byte>(),
+                    ThumbnailPic = byteArray,
                     StartTimes = new List<List<string>>()
                     {
                         new List<string>{"20:00", "22:00"},
                         new List<string>{"20:00", "22:00"}
                     },
-                    Title = "Title"
+                    Title = "Title1"
                 },
                 new Movie
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Genre = "Action, Crime, Thriller",
+                    Id = "64954028b90bb3aacd5fd85c",
+                    Genre = "Comedy",
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
-                    ThumbnailPic = Array.Empty<byte>(),
+                    ThumbnailPic = byteArray,
                     StartTimes = new List<List<string>>()
                     {
                         new List<string>{"20:00", "22:00"},
                         new List<string>{"20:00", "22:00"}
                     },
-                    Title = "Title"
+                    Title = "Title2"
                 },
                 new Movie
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Genre = "Action, Crime, Thriller",
+                    Id = "64954028b90bb3aacd5fd85d",
+                    Genre = "Sci-Fi",
                     MovieLength = "2:00",
                     ReleaseYear = "2023",
-                    ThumbnailPic = Array.Empty<byte>(),
+                    ThumbnailPic = byteArray,
                     StartTimes = new List<List<string>>()
                     {
                         new List<string>{"20:00", "22:00"},
                         new List<string>{"20:00", "22:00"}
                     },
-                    Title = "Title"
+                    Title = "Title3"
                 }
             };
         }
