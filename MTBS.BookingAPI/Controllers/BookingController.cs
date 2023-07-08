@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MTBS.BookingAPI.Application.Commands;
+using MTBS.BookingAPI.Application.Queries;
 using MTBS.BookingAPI.EventBusIntegration.Messages;
 using MTBS.BookingAPI.Models;
 using MTBS.BookingAPI.Models.Dtos;
@@ -16,13 +19,15 @@ namespace MTBS.BookingAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
+        private readonly IMediator _mediator;
 
-        public BookingController(IBookingRepository bookingRepository, IMapper mapper, IConfiguration configuration, IRabbitMQMessageSender rabbitMQMessageSender)
+        public BookingController(IBookingRepository bookingRepository, IMapper mapper, IConfiguration configuration, IRabbitMQMessageSender rabbitMQMessageSender, IMediator mediator)
         {
             _bookingRepository = bookingRepository;
             _mapper = mapper;
             _configuration = configuration;
             _rabbitMQMessageSender = rabbitMQMessageSender;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -32,14 +37,23 @@ namespace MTBS.BookingAPI.Controllers
             {
                 return BadRequest();
             }
-            var viewingArea = await _bookingRepository.GetFullSeatListAsync(movieId, screeningDate);
+
+            var viewingArea = await _mediator.Send(new GetSeatListByMovieAndDateQuery
+            {
+                MovieId = movieId,
+                ScreeningDate = screeningDate
+            });
+
             return Ok(viewingArea);
         }
 
         [HttpPost]
         public async Task<ActionResult> SaveBookingData(BookingHeaderDto bookingHeaderDto)
         {
-            bookingHeaderDto.Id = await _bookingRepository.SaveBookingDataAsync(_mapper.Map<BookingHeader>(bookingHeaderDto));
+            bookingHeaderDto.Id = await _mediator.Send(new SaveBookingDataCommand
+            {
+                BookingHeaderDto = bookingHeaderDto
+            });
 
             var emailLogMessage = _mapper.Map<EmailLogMessage>(bookingHeaderDto);
             _rabbitMQMessageSender.PublishMessage(emailLogMessage, _configuration["EventBus:NotificationQueueName"]);

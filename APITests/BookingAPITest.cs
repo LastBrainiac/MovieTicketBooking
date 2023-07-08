@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Moq;
+using MTBS.BookingAPI.Application.Commands;
+using MTBS.BookingAPI.Application.Queries;
 using MTBS.BookingAPI.Controllers;
 using MTBS.BookingAPI.Models;
 using MTBS.BookingAPI.Models.Dtos;
@@ -16,6 +20,7 @@ namespace APITests
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IConfiguration> _configuration;
         private readonly Mock<IRabbitMQMessageSender> _rabbitMQMessageSender;
+        private readonly Mock<IMediator> _mediator;
 
         public BookingAPITest()
         {
@@ -23,6 +28,7 @@ namespace APITests
             _mapper = new Mock<IMapper>();
             _configuration = new Mock<IConfiguration>();
             _rabbitMQMessageSender = new Mock<IRabbitMQMessageSender>();
+            _mediator = new Mock<IMediator>();
         }
 
         [Fact]
@@ -32,10 +38,10 @@ namespace APITests
             var screeningDate = new DateTime(2023, 05, 10);
             ViewingAreaRowDTO seatList = GetFakeSeatList();
 
-            _repository.Setup(p => p.GetFullSeatListAsync(movieId, screeningDate))
+            _mediator.Setup(p => p.Send(It.IsAny<GetSeatListByMovieAndDateQuery>(), default))
                 .Returns(Task.FromResult(seatList));
 
-            var bookingController = new BookingController(_repository.Object, _mapper.Object, _configuration.Object, _rabbitMQMessageSender.Object);
+            var bookingController = new BookingController(_repository.Object, _mapper.Object, _configuration.Object, _rabbitMQMessageSender.Object, _mediator.Object);
 
             var response = await bookingController.GetSeatListByMovieAndDate(movieId, screeningDate);
 
@@ -48,10 +54,10 @@ namespace APITests
         {
             var bookingHeaderDto = GetFakeBookingHeaderDto();
 
-            _repository.Setup(p => p.SaveBookingDataAsync(_mapper.Object.Map<BookingHeader>(bookingHeaderDto)))
+            _mediator.Setup(p => p.Send(It.IsAny<SaveBookingDataCommand>(), default))
                 .Returns(Task.FromResult(1));
 
-            var bookingController = new BookingController(_repository.Object, _mapper.Object, _configuration.Object, _rabbitMQMessageSender.Object);
+            var bookingController = new BookingController(_repository.Object, _mapper.Object, _configuration.Object, _rabbitMQMessageSender.Object, _mediator.Object);
 
             var response = await bookingController.SaveBookingData(bookingHeaderDto);
 

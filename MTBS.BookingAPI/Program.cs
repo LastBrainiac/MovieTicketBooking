@@ -4,6 +4,7 @@ using MTBS.BookingAPI.EventBusIntegration.Consumer;
 using MTBS.BookingAPI.Extensions;
 using MTBS.BookingAPI.Repositories;
 using MTBS.EventBus;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddHostedService<RabbitMQBookingConsumer>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddControllers();
 
