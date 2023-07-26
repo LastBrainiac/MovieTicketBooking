@@ -22,6 +22,12 @@ jobs:
             tag: apigateway
           - dockerfile: ./MTBS.BasketAPI/Dockerfile
             tag: basketapi
+          - dockerfile: ./MTBS.BookingAPI/Dockerfile
+            tag: bookingapi
+          - dockerfile: ./MTBS.MovieCatalogAPI/Dockerfile
+            tag: moviecatalogapi
+          - dockerfile: ./MTBS.NotificationAPI/Dockerfile
+            tag: notificationapi
     permissions:
       contents: read
       packages: write
