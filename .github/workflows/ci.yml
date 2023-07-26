@@ -19,9 +19,9 @@ jobs:
       matrix:
         include:
           - dockerfile: ./MTBS.APIGateway/Dockerfile
-            image: docker.io/aludanszki/apigateway
+            tag: apigateway
           - dockerfile: ./MTBS.BasketAPI/Dockerfile
-            image: docker.io/aludanszki/basketapi
+            tag: basketapi
     permissions:
       contents: read
       packages: write
@@ -43,6 +43,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: aludanszki/mtb
+        tags: ${{matrix.tag}}
         registry: docker.io
         dockerfile: ${{ matrix.dockerfile }}
         username: ${{ secrets.DOCKER_USERNAME }}
