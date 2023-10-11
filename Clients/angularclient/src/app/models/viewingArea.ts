@@ -1,10 +1,10 @@
 export interface ViewingArea {
-    rows: Row[] | undefined;
+    rows: Array<Row> | undefined;
 }
 
 export interface Row {
     rowNumber: number;
-    seats: Seat[];
+    seats: Array<Seat>;
 }
 
 export interface Seat {

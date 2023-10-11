@@ -2,7 +2,7 @@ export interface BookingHeaderDto {
     fullName: string;
     emailAddress:string;
     phoneNumber: string;
-    bookingDetails: BookingDetailsDto[];
+    bookingDetails: Array<BookingDetailsDto>;
 }
 
 export interface BookingDetailsDto {
@@ -11,7 +11,7 @@ export interface BookingDetailsDto {
     ticketQuantity: number;
     ticketPrice: number;
     screeningDate: string;
-    reservedSeats: ReservedSeatDto[];
+    reservedSeats: Array<ReservedSeatDto>;
 }
 
 export interface ReservedSeatDto {
