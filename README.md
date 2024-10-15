@@ -49,7 +49,7 @@ Check the other services with these information:
     - Login/password:   `sa/Mtbs2023*`
 2. [Redis Commander](http://host.docker.internal:8081/) `(root/secret)`
 3. [RabbitMQ](http://host.docker.internal:15672/) `(guest/guest)`
-4. [Mongo Express](http://host.docker.internal:8800/)
+4. [Mongo Express](http://host.docker.internal:8800/) `(admin/pass)`
 
 
 ### Frontend
